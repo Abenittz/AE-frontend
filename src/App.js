@@ -12,6 +12,9 @@ import Speakers from "./Pages/Speakers";
 import ScrollToTop from "./Components/ScrollToTop";
 import SomeCom from "./Pages/SomeCom";
 import Admin from "./Pages/Admin";
+import SpeakerReg from "./Components/SpeakerReg";
+import SponsorReg from "./Components/SponsorReg";
+import ScheduleReg from "./Components/ScheduleReg";
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
         <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/check" element={<SomeCom />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/speaker/:id" element={<SpeakerReg />} />
+        <Route path="/sponsor/:id" element={<SponsorReg />} />
+        <Route path="/schedule/:id" element={<ScheduleReg />} />
       </Routes>
       <Footer />
     </Router>

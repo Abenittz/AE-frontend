@@ -4,6 +4,8 @@ import { EventContext } from "../MyContext";
 
 const Home = () => {
   const { events } = useContext(EventContext);
+
+  console.log(events);
   const upcomingevents = events.filter((event) => event.status === "upcoming");
   const firstSixEvents = upcomingevents.slice(0, Math.min(events.length, 6));
   console.log(firstSixEvents);

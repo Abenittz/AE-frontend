@@ -2,7 +2,7 @@ import React from "react";
 
 const Success = () => {
   return (
-    <div className="container">
+    <div className="container vh-100">
       <div className="row">
         <div className="col-lg-6 offset-lg-3 mt-2">
           <div className="card">

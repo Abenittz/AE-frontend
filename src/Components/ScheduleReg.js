@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import Success from "./Success";
+import Success from "../Pages/Success";
 
-const Register = () => {
+const ScheduleReg = () => {
   const { id } = useParams();
   console.log(id);
 
@@ -10,11 +10,12 @@ const Register = () => {
     useState(false);
   const [validationError, setValidationError] = useState(null);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [date, setDate] = useState("");
+  const [start_time, setStartTime] = useState("");
+  const [end_time, setEndTime] = useState("");
+  const [activity, setActivity] = useState("");
 
-  const registerAttendee = async (e) => {
+  const registerSchedule = async (e) => {
     e.preventDefault();
 
     // Perform frontend validation
@@ -28,14 +29,15 @@ const Register = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         event: id,
-        fullname: name,
-        email: email,
-        phone: phone,
+        date: date,
+        start_time: start_time,
+        end_time: end_time,
+        activity: activity,
       }),
     };
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/attendee/register/`,
+      `http://127.0.0.1:8000/api/schedule/register/`,
       requestOptions
     );
     if (res.status === 201) {
@@ -49,7 +51,12 @@ const Register = () => {
     // Implement your validation logic here
     // Return true if validation passes, false otherwise
     // You can check for empty fields, valid email format, etc.
-    if (name === "" || email === "" || phone === "") {
+    if (
+      date === "" ||
+      start_time === "" ||
+      end_time === "" ||
+      activity === ""
+    ) {
       return false;
     }
 
@@ -70,71 +77,84 @@ const Register = () => {
       {isRegistrationSuccessful ? (
         <Success />
       ) : (
-        <div className="container min-vh-100">
+        <div className="container">
           <div className="row">
             <div className="col-lg-8 offset-lg-2 mt-2">
               <div className="card">
                 <div className="card-body">
-                  <h2 className="card-title text-center">Event Registration</h2>
+                  <h2 className="card-title text-center">
+                    Schedule Registration
+                  </h2>
                   <form>
                     <div className="mb-3 mt-3">
                       <div className="row">
-                        <div className="col-md-6">
-                          <label htmlFor="fullName" className="form-label">
-                            Full Name
+                        <div className="mb-3">
+                          <label htmlFor="date" className="form-label">
+                            Date
                           </label>
                           <input
                             type="text"
                             className="form-control"
-                            id="fullName"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            id="datetime-local"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
                             required
                           />
                         </div>
+                        <div className="mb-3 mt-3">
+                          <div className="row">
+                            <div className="col-md-6">
+                              <label
+                                htmlFor="start_time"
+                                className="form-label"
+                              >
+                                Start Time
+                              </label>
+                              <input
+                                type="time"
+                                className="form-control"
+                                id="start_time"
+                                value={start_time}
+                                onChange={(e) => setStartTime(e.target.value)}
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
                         <div className="col-md-6">
-                          <label htmlFor="email" className="form-label">
-                            Email Address
+                          <label htmlFor="end_time" className="form-label">
+                            Phone Number
                           </label>
                           <input
-                            type="email"
+                            type="time"
                             className="form-control"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            id="end_time"
+                            value={end_time}
+                            onChange={(e) => setEndTime(e.target.value)}
                             required
                           />
                         </div>
                       </div>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="phoneNumber" className="form-label">
-                        Phone Number
+                      <label htmlFor="activity" className="form-label">
+                        ACTIVITY
                       </label>
                       <input
-                        type="tel"
+                        type="textarea"
                         className="form-control"
-                        id="phoneNumber"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        id="activity"
+                        value={activity}
+                        onChange={(e) => setActivity(e.target.value)}
                         required
                       />
                     </div>
-                    {/* <div class="mb-3">
-                    <label for="additionalInfo" class="form-label">
-                      Additional Information
-                    </label>
-                    <textarea
-                      class="form-control"
-                      id="additionalInfo"
-                      rows="3"
-                    ></textarea>
-                  </div> */}
+
                     <button
-                      onClick={(e) => registerAttendee(e)}
-                      className="btn btn-primary w-100"
+                      onClick={(e) => registerSchedule(e)}
+                      className="btn btn-primary w-25"
                     >
-                      Register
+                      Next
                     </button>
                   </form>
                 </div>
@@ -147,4 +167,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ScheduleReg;

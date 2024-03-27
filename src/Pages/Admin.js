@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import Success from "./Success";
+import EventSuccess from "./EventSuccess";
 
 const Admin = () => {
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
@@ -87,7 +88,7 @@ const Admin = () => {
       )}
 
       {isRegistrationSuccessful ? (
-        <Success />
+        <EventSuccess />
       ) : (
         <div className="container">
           <div className="row">
@@ -239,9 +240,9 @@ const Admin = () => {
                   </div> */}
                     <button
                       onClick={(e) => registerEvent(e)}
-                      className="btn btn-primary w-100"
+                      className="btn btn-primary w-25"
                     >
-                      Register
+                      Next
                     </button>
                   </form>
                 </div>

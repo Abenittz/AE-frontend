@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import Success from "./Success";
+import SponsorReg from "./SponsorReg";
 
-const Register = () => {
+const SpeakerReg = () => {
   const { id } = useParams();
   console.log(id);
 
@@ -11,10 +11,10 @@ const Register = () => {
   const [validationError, setValidationError] = useState(null);
 
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [role, setRole] = useState("");
 
-  const registerAttendee = async (e) => {
+  const registerSpeaker = async (e) => {
     e.preventDefault();
 
     // Perform frontend validation
@@ -29,13 +29,13 @@ const Register = () => {
       body: JSON.stringify({
         event: id,
         fullname: name,
-        email: email,
-        phone: phone,
+        organization: organization,
+        role: role,
       }),
     };
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/attendee/register/`,
+      `http://127.0.0.1:8000/api/speaker/register/`,
       requestOptions
     );
     if (res.status === 201) {
@@ -49,7 +49,7 @@ const Register = () => {
     // Implement your validation logic here
     // Return true if validation passes, false otherwise
     // You can check for empty fields, valid email format, etc.
-    if (name === "" || email === "" || phone === "") {
+    if (name === "" || organization === "" || role === "") {
       return false;
     }
 
@@ -68,14 +68,16 @@ const Register = () => {
       )}
 
       {isRegistrationSuccessful ? (
-        <Success />
+        <SponsorReg />
       ) : (
-        <div className="container min-vh-100">
+        <div className="container">
           <div className="row">
             <div className="col-lg-8 offset-lg-2 mt-2">
               <div className="card">
                 <div className="card-body">
-                  <h2 className="card-title text-center">Event Registration</h2>
+                  <h2 className="card-title text-center">
+                    Speaker Registration
+                  </h2>
                   <form>
                     <div className="mb-3 mt-3">
                       <div className="row">
@@ -93,48 +95,39 @@ const Register = () => {
                           />
                         </div>
                         <div className="col-md-6">
-                          <label htmlFor="email" className="form-label">
-                            Email Address
+                          <label htmlFor="organization" className="form-label">
+                            organization
                           </label>
                           <input
-                            type="email"
+                            type="organization"
                             className="form-control"
-                            id="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            id="organization"
+                            value={organization}
+                            onChange={(e) => setOrganization(e.target.value)}
                             required
                           />
                         </div>
                       </div>
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="phoneNumber" className="form-label">
-                        Phone Number
+                      <label htmlFor="role" className="form-label">
+                        Role
                       </label>
                       <input
                         type="tel"
                         className="form-control"
-                        id="phoneNumber"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        id="role"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
                         required
                       />
                     </div>
-                    {/* <div class="mb-3">
-                    <label for="additionalInfo" class="form-label">
-                      Additional Information
-                    </label>
-                    <textarea
-                      class="form-control"
-                      id="additionalInfo"
-                      rows="3"
-                    ></textarea>
-                  </div> */}
+
                     <button
-                      onClick={(e) => registerAttendee(e)}
-                      className="btn btn-primary w-100"
+                      onClick={(e) => registerSpeaker(e)}
+                      className="btn btn-primary w-25"
                     >
-                      Register
+                      Next
                     </button>
                   </form>
                 </div>
@@ -147,4 +140,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SpeakerReg;
