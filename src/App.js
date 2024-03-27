@@ -11,6 +11,7 @@ import EventDetail from "./Pages/Detail";
 import Speakers from "./Pages/Speakers";
 import ScrollToTop from "./Components/ScrollToTop";
 import SomeCom from "./Pages/SomeCom";
+import Admin from "./Pages/Admin";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/check" element={<SomeCom />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       <Footer />
     </Router>
