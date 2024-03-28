@@ -93,7 +93,7 @@ const ScheduleReg = () => {
                             Date
                           </label>
                           <input
-                            type="text"
+                            type="date"
                             className="form-control"
                             id="datetime-local"
                             value={date}

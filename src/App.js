@@ -15,6 +15,7 @@ import Admin from "./Pages/Admin";
 import SpeakerReg from "./Components/SpeakerReg";
 import SponsorReg from "./Components/SponsorReg";
 import ScheduleReg from "./Components/ScheduleReg";
+import EventReg from "./Pages/EventReg";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/speaker/:id" element={<SpeakerReg />} />
         <Route path="/sponsor/:id" element={<SponsorReg />} />
         <Route path="/schedule/:id" element={<ScheduleReg />} />
+        <Route path="/eventreg" element={<EventReg />} />
       </Routes>
       <Footer />
     </Router>

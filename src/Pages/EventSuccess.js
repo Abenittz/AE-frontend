@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import React from "react";
-import SpeakerReg from "../Components/SpeakerReg";
 import { EventContext } from "../MyContext";
 import { Link } from "react-router-dom";
 

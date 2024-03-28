@@ -5,6 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 const Events = () => {
   const { events } = useContext(EventContext);
+  console.log(events);
   const [dateFilter, setDateFilter] = useState("");
 
   const handleDateChange = (event) => {
