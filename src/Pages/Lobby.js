@@ -3,10 +3,10 @@ import React from "react";
 const Lobby = () => {
   return (
     <>
-      <section id="events">
-        <div className="container min-vh-100">
-          <div className="row mt-3 justify-content-center">
-            <div className="col-md-8">
+      <section id="events" className="min-vh-100">
+        <div className="container">
+          <div className="row mt-3 justify-content-center mt-10">
+            <div className="col-md-8 col-xl-6">
               <div className="card m-3 p-3">
                 <div className="card-body">
                   <h3 className="card-title text-center">Lobby</h3>

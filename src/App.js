@@ -39,7 +39,7 @@ function App() {
         <Route path="/sponsor/:id" element={<SponsorReg />} />
         <Route path="/schedule/:id" element={<ScheduleReg />} />
         <Route path="/eventreg" element={<EventReg />} />
-        <Route path="/room" element={<StreamRoom />} />
+        <Route path="/room" element={<StreamRoom hidefooter={true} />} />
         <Route path="/lobby" element={<Lobby />} />
       </Routes>
       <Footer />
