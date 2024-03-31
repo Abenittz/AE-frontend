@@ -9,6 +9,7 @@
     "@zegocloud/zego-uikit-prebuilt": "^2.0.1",
     "agora-rtc-react": "^2.1.0",
     "agora-rtc-sdk-ng": "^4.20.2",
+    "bootstrap-icons": "^1.11.3",
     "date-fns": "^2.30.0",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",

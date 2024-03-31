@@ -2,7 +2,7 @@ import React from "react";
 import HeaderAdmin from "./HeaderBak";
 
 const AdminHeader = () => {
-  const imageUrl = "/images/event.jpg";
+  const imageUrl = "/img/event.jpg";
 
   return (
     <section id="events">
