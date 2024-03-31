@@ -119,43 +119,44 @@ const ScheduleReg = () => {
                                 required
                               />
                             </div>
+
+                            <div className="col-md-6">
+                              <label htmlFor="end_time" className="form-label">
+                                End Time
+                              </label>
+                              <input
+                                type="time"
+                                className="form-control"
+                                id="end_time"
+                                value={end_time}
+                                onChange={(e) => setEndTime(e.target.value)}
+                                required
+                              />
+                            </div>
                           </div>
                         </div>
-                        <div className="col-md-6">
-                          <label htmlFor="end_time" className="form-label">
-                            Phone Number
-                          </label>
-                          <input
-                            type="time"
-                            className="form-control"
-                            id="end_time"
-                            value={end_time}
-                            onChange={(e) => setEndTime(e.target.value)}
-                            required
-                          />
-                        </div>
                       </div>
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="activity" className="form-label">
-                        ACTIVITY
-                      </label>
-                      <input
-                        type="textarea"
-                        className="form-control"
-                        id="activity"
-                        value={activity}
-                        onChange={(e) => setActivity(e.target.value)}
-                        required
-                      />
-                    </div>
+                      <div className="mb-3">
+                        <label htmlFor="activity" className="form-label">
+                          ACTIVITY
+                        </label>
+                        <input
+                          type="textarea"
+                          className="form-control"
+                          id="activity"
+                          value={activity}
+                          onChange={(e) => setActivity(e.target.value)}
+                          required
+                        />
+                      </div>
 
-                    <button
-                      onClick={(e) => registerSchedule(e)}
-                      className="btn btn-primary w-25"
-                    >
-                      Next
-                    </button>
+                      <button
+                        onClick={(e) => registerSchedule(e)}
+                        className="btn btn-primary w-25"
+                      >
+                        Next
+                      </button>
+                    </div>
                   </form>
                 </div>
               </div>

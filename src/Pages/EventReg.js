@@ -6,6 +6,7 @@ const EventReg = () => {
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
     useState(false);
   const [validationError, setValidationError] = useState(null);
+  const [currentpath, setCurrentPath] = useState(null);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -49,6 +50,8 @@ const EventReg = () => {
     if (res.status === 201) {
       const data = await res.json();
       console.log(data);
+      console.log(data.id);
+      setCurrentPath(data.id);
       setIsRegistrationSuccessful(true);
     } else {
       setValidationError("the connection is not established");
@@ -56,9 +59,6 @@ const EventReg = () => {
   };
 
   const validateInputs = () => {
-    // Implement your validation logic here
-    // Return true if validation passes, false otherwise
-    // You can check for empty fields, valid email format, etc.
     if (
       title.trim() === "" ||
       description.trim() === "" ||
@@ -72,7 +72,7 @@ const EventReg = () => {
       return false;
     }
 
-    return true; // Change this logic to your actual validation
+    return true;
   };
 
   return (
@@ -87,7 +87,7 @@ const EventReg = () => {
       )}
 
       {isRegistrationSuccessful ? (
-        <EventSuccess />
+        <EventSuccess current={currentpath} />
       ) : (
         <div className="container">
           <div className="row">

@@ -1,14 +1,8 @@
-import { useContext } from "react";
 import React from "react";
-import { EventContext } from "../MyContext";
 import { Link } from "react-router-dom";
 
-const EventSuccess = () => {
-  const { events } = useContext(EventContext);
-  const allevents = events;
-  console.log(allevents);
-  const sort = events.sort((a, b) => a.id - b.id);
-  const current = sort[sort.length - 1];
+const EventSuccess = (props) => {
+  const current = props.current;
   console.log(current);
 
   return (
@@ -27,7 +21,7 @@ const EventSuccess = () => {
                 </p>
                 <div className="mt-4">
                   <Link
-                    to={`/speaker/${current.id}`}
+                    to={`/speaker/${current}`}
                     className="btn btn-primary ms-2"
                   >
                     Next
