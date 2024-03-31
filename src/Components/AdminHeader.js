@@ -2,7 +2,7 @@ import React from "react";
 import HeaderAdmin from "./HeaderBak";
 
 const AdminHeader = () => {
-  const imageUrl = "/img/event.jpg";
+  const imageUrl = require("../img/event.jpg");
 
   return (
     <section id="events">
@@ -11,8 +11,8 @@ const AdminHeader = () => {
           <div className="col">
             <HeaderAdmin imageUrl={imageUrl} className="card mt-3 p-5">
               <div className="card-title">
-                <h1 className="mt-2">Developers Meetup</h1>
-                <h5 className="">with: Abenezer Tesfaye</h5>
+                <h1 className="mt-2 text-white">Developers Meetup</h1>
+                <h5 className="text-white">with: Abenezer Tesfaye</h5>
               </div>
               <div className="card-body mt-5 p-0">
                 <div className="mt-5">
