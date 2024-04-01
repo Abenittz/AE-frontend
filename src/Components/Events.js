@@ -2,7 +2,7 @@ import React from "react";
 
 const Events1 = () => {
   return (
-    <div className="container mt-5 border rounded p-3">
+    <div className="container mt-5 border rounded p-5">
       <div className="d-flex justify-content-between">
         <div>
           <h1>EVENTS</h1>

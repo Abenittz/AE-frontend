@@ -7,6 +7,7 @@ const EventReg = () => {
     useState(false);
   const [validationError, setValidationError] = useState(null);
   const [currentpath, setCurrentPath] = useState(null);
+  const [eventData, setEventdata] = useState(null);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -50,6 +51,7 @@ const EventReg = () => {
     if (res.status === 201) {
       const data = await res.json();
       console.log(data);
+      setEventdata(data);
       console.log(data.id);
       setCurrentPath(data.id);
       setIsRegistrationSuccessful(true);

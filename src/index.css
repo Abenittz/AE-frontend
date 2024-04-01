@@ -387,4 +387,25 @@ footer {
 }
 
 
-/* ------------------  AdminHHeader.js | styles ------------------ */
+/* ------------------  State.js | styles ------------------ */
+
+#state-container {
+  width: 80px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background-color: rgba(255, 0, 0, 0.4);
+}
+
+#dot-circle {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  margin-right: 18px;
+
+  background-color: #df0000;
+  position: relative;
+  left: 0px;
+}

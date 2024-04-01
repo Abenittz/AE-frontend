@@ -13,6 +13,7 @@ const Home = () => {
     firstSixEvents.length > 0
       ? firstSixEvents[firstSixEvents.length - 1]
       : null;
+  console.log(mostRecentEvent);
 
   return (
     <>
