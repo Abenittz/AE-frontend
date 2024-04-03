@@ -5,10 +5,10 @@ const Footer = () => {
   const location = useLocation();
   const hideFooterPaths = ["/room"];
 
-  // Check if the current location matches any of the paths where footer should be hidden
   const shouldHideFooter = hideFooterPaths.includes(location.pathname);
 
-  // Render the footer only if shouldHideFooter is false
+  const currentyear = new Date().getFullYear();
+
   return (
     !shouldHideFooter && (
       <footer className="py-3 my-4 bg-dark">
@@ -29,7 +29,9 @@ const Footer = () => {
             </a>
           </li>
         </ul>
-        <p className="text-center text-muted">© 2023 ASTUEvents, Inc</p>
+        <p className="text-center text-muted">
+          © {currentyear} ASTUEvents, Inc
+        </p>
       </footer>
     )
   );

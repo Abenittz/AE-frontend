@@ -8,6 +8,7 @@ const Home = () => {
 
   console.log(events);
   const upcomingevents = events.filter((event) => event.status === "upcoming");
+  console.log(upcomingevents);
   const firstSixEvents = upcomingevents.slice(0, Math.min(events.length, 6));
   console.log(firstSixEvents);
   const mostRecentEvent =
@@ -15,6 +16,7 @@ const Home = () => {
       ? firstSixEvents[firstSixEvents.length - 1]
       : null;
   console.log(mostRecentEvent);
+  console.log(mostRecentEvent.attendees.length);
 
   return (
     <>
