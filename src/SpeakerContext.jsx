@@ -15,6 +15,7 @@ const SpeakerProvider = ({ children }) => {
           throw new Error("Failed to fetch speakers");
         }
         const data = await res.json();
+
         setSpeakers(data);
       } catch (error) {
         console.error("Error fetching speakers:", error);

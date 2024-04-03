@@ -20,6 +20,7 @@ import StreamRoom from "./Pages/StreamRoom";
 import Lobby from "./Pages/Lobby";
 import EventSuccess from "./Pages/EventSuccess";
 import CountCard from "./Components/Admin/CountCard";
+import RoomLogin from "./Pages/RoomLogin";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/room" element={<StreamRoom hidefooter={true} />} />
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/cards" element={<CountCard />} />
+        <Route path="/roomlogin/:id" element={<RoomLogin />} />
       </Routes>
       <Footer />
     </Router>

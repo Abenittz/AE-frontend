@@ -16,7 +16,6 @@ const Home = () => {
       ? firstSixEvents[firstSixEvents.length - 1]
       : null;
   console.log(mostRecentEvent);
-  console.log(mostRecentEvent.attendees.length);
 
   return (
     <>

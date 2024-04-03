@@ -12,10 +12,10 @@ const Register = () => {
   console.log(events.id === id);
   const currentEvent = events.filter((event) => event.id === parseId);
   const selectedEvent = currentEvent.length > 0 ? currentEvent[0] : null;
-  console.log(selectedEvent.attendees.length);
+  console.log(selectedEvent["attendees"].length);
 
   const availableSeat =
-    selectedEvent.attendees.length <= selectedEvent.available_seat;
+    selectedEvent["attendees"].length <= selectedEvent["available_seat"];
   console.log(availableSeat);
 
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] =
@@ -70,7 +70,7 @@ const Register = () => {
 
   return (
     <>
-      {!availableSeat ? (
+      {availableSeat ? (
         <section id="register">
           {validationError && (
             <div
@@ -136,16 +136,7 @@ const Register = () => {
                             required
                           />
                         </div>
-                        {/* <div class="mb-3">
-                    <label for="additionalInfo" class="form-label">
-                      Additional Information
-                    </label>
-                    <textarea
-                      class="form-control"
-                      id="additionalInfo"
-                      rows="3"
-                    ></textarea>
-                  </div> */}
+
                         <button
                           onClick={(e) => registerAttendee(e)}
                           className="btn btn-primary w-100"

@@ -10,6 +10,7 @@ const EventProvider = ({ children }) => {
   useEffect(() => {
     const getEvents = async () => {
       const eventsFromServer = await fetchEvents();
+      console.log("this the use effect");
       setEvents(eventsFromServer);
     };
     getEvents();
@@ -27,9 +28,33 @@ const EventProvider = ({ children }) => {
   //   return data.data;
   // };
 
+  const loginUser = async (email, password) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/attendee/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("User login failed");
+      }
+
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error.message);
+      throw error;
+    }
+  };
+
   const contextValue = {
     events,
     // getEvent,
+    loginUser,
   };
 
   return (

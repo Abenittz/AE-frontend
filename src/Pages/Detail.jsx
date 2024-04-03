@@ -60,6 +60,14 @@ const EventDetail = () => {
                   Register Now
                 </Link>
               </div>
+              <div className="mt-4">
+                <Link
+                  to={`/roomlogin/${data.event.id}`}
+                  className="btn btn-light ms-2"
+                >
+                  Go Live
+                </Link>
+              </div>
             </div>
           </div>
         </BackImg>
