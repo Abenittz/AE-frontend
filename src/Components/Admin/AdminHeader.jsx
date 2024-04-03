@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import HeaderAdmin from "./HeaderBak";
+import HeaderAdmin from "../HeaderBak";
 import State from "./State";
-import { EventContext } from "../MyContext";
+import { EventContext } from "../../MyContext";
 import { Link } from "react-router-dom";
+import imageUrl from "../../img/event.jpg";
 
 const AdminHeader = () => {
-  const imageUrl = require("../img/event.jpg");
   const { events } = useContext(EventContext);
 
   if (!events || events.length === 0) {
@@ -26,7 +26,10 @@ const AdminHeader = () => {
         <div className="col">
           <HeaderAdmin imageUrl={imageUrl} className="card mt-3 p-5">
             <div className="card-title">
-              <State />
+              <Link to={"/room"}>
+                <State />
+              </Link>
+
               <h1 className="mt-2 text-white">
                 {mostRecentEvent ? mostRecentEvent.title : "No Recent Event"}
               </h1>
@@ -41,7 +44,7 @@ const AdminHeader = () => {
                   to={`/speaker/${mostRecentEvent.id}`}
                   className="btn btn-primary"
                 >
-                  Add Detail
+                  Go Live Now
                 </Link>
               </div>
             </div>

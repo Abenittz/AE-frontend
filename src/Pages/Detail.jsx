@@ -5,6 +5,9 @@ import { MdNotes } from "react-icons/md";
 import BackImg from "../Components/BackImg";
 import { useLocation } from "react-router-dom";
 import CountdownTimer from "../Components/CountdownTimer";
+import imageUrl from "../img/back_banner.webp";
+import image5 from "../img/5.jpg.webp";
+import telebirr from "../img/Telebirr.png";
 
 const EventDetail = () => {
   const imageUrl = "/images/back_banner.webp";
@@ -67,11 +70,7 @@ const EventDetail = () => {
           <div className="row d-flex align-items-center">
             <div className="col-lg-4 col-md-12 col-12">
               <div className="about-img">
-                <img
-                  src={require("../img/back_banner.webp")}
-                  alt=""
-                  className="card-img-top rounded"
-                />
+                <img src={imageUrl} alt="" className="card-img-top rounded" />
               </div>
             </div>
             <div className="col-lg-8 col-md-12 col-12 ps-lg-5 ">
@@ -133,11 +132,7 @@ const EventDetail = () => {
                 <div className="card text-light text-center bg-white pb-2 h-100">
                   <div className="card-body text-dark">
                     <div className="img-area mb-4">
-                      <img
-                        src={require("../img/5.jpg.webp")}
-                        className="card-img-top"
-                        alt=""
-                      />
+                      <img src={image5} className="card-img-top" alt="" />
                     </div>
                     <h3 className="card-title">
                       {speaker.fullname.toUpperCase()}
@@ -255,11 +250,7 @@ const EventDetail = () => {
               <div className="col-12 col-md-12 col-lg-4" key={index}>
                 <div className="card text-light text-center bg-white pb-2 h-100">
                   <div className="card-body text-dark">
-                    <img
-                      src={require("../img/Telebirr.png")}
-                      className="card-img-top"
-                      alt=""
-                    />
+                    <img src={telebirr} className="card-img-top" alt="" />
                     <h3 className="card-title mt-5">{sponsor.name}</h3>
                     <p className="lead">{sponsor.description}</p>
                     {/* <button className="btn bg-warning text-dark">

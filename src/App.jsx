@@ -19,8 +19,7 @@ import EventReg from "./Pages/EventReg";
 import StreamRoom from "./Pages/StreamRoom";
 import Lobby from "./Pages/Lobby";
 import EventSuccess from "./Pages/EventSuccess";
-import AdminHeader from "./Components/AdminHeader";
-import CountCard from "./Components/CountCard";
+import CountCard from "./Components/Admin/CountCard";
 
 function App() {
   return (
@@ -45,7 +44,6 @@ function App() {
         <Route path="/eventsucces" element={<EventSuccess />} />
         <Route path="/room" element={<StreamRoom hidefooter={true} />} />
         <Route path="/lobby" element={<Lobby />} />
-        <Route path="/header" element={<AdminHeader />} />
         <Route path="/cards" element={<CountCard />} />
       </Routes>
       <Footer />

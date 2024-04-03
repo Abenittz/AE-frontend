@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { EventContext } from "../MyContext";
+import indexImage from "../img/index.webp";
 
 const Home = () => {
   const { events } = useContext(EventContext);
@@ -66,7 +67,7 @@ const Home = () => {
               <div className="col-md-4 mb-4" key={index}>
                 <div className="card">
                   <img
-                    src={require("../img/index.webp")}
+                    src={indexImage}
                     className="card-img-top"
                     alt="Event 1"
                   />
@@ -123,11 +124,7 @@ const Home = () => {
           <div className="row">
             <div className="col-md-4 mb-4">
               <div className="card custom-event-card">
-                <img
-                  src={require("../img/index.webp")}
-                  className="card-img-top"
-                  alt="Event 1"
-                />
+                <img src={indexImage} className="card-img-top" alt="Event 1" />
                 <div className="card-body">
                   <h5 className="card-title text-muted">
                     Adama Science and Technology University Annual Meeting
@@ -151,11 +148,7 @@ const Home = () => {
             </div>
             <div className="col-md-4 mb-4">
               <div className="card custom-event-card">
-                <img
-                  src={require("../img/index.webp")}
-                  className="card-img-top"
-                  alt="Event 2"
-                />
+                <img src={indexImage} className="card-img-top" alt="Event 2" />
                 <div className="card-body">
                   <h5 className="card-title text-muted">
                     Adama Science and Technology University Annual Meeting
@@ -179,11 +172,7 @@ const Home = () => {
             </div>
             <div className="col-md-4 mb-4">
               <div className="card custom-event-card">
-                <img
-                  src={require("../img/index.webp")}
-                  className="card-img-top"
-                  alt="Event 3"
-                />
+                <img src={indexImage} className="card-img-top" alt="Event 3" />
                 <div className="card-body">
                   <h5 className="card-title text-muted">
                     Adama Science and Technology University Annual Meeting

@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 // import { SpeakersContext } from "../SpeakerContext";
 
+import duresaImage from "../img/duresa.jpg";
+import chalaImage from "../img/chala.jpg";
+import kumaImage from "../img/kuma.jpg";
+
 const Speakers = () => {
   // const speakers = useContext(SpeakersContext);
 
@@ -14,11 +18,7 @@ const Speakers = () => {
             <div className="card text-light text-center bg-white pb-2 h-100">
               <div className="card-body text-dark">
                 <div className="img-area mb-4">
-                  <img
-                    src={require("../img/duresa.jpg")}
-                    className="card-img-top"
-                    alt=""
-                  />
+                  <img src={duresaImage} className="card-img-top" alt="" />
                 </div>
                 <h3 className="card-title">Duresa Wata</h3>
                 <p className="lead">
@@ -35,11 +35,7 @@ const Speakers = () => {
             <div className="card text-light text-center bg-white pb-2 h-100">
               <div className="card-body text-dark">
                 <div className="img-area mb-4">
-                  <img
-                    src={require("../img/chala.jpg")}
-                    className="card-img-top"
-                    alt=""
-                  />
+                  <img src={chalaImage} className="card-img-top" alt="" />
                 </div>
                 <h3 className="card-title">Chala Olani</h3>
                 <p className="lead">
@@ -56,11 +52,7 @@ const Speakers = () => {
             <div className="card text-light text-center bg-white pb-2 h-100">
               <div className="card-body text-dark">
                 <div className="img-area mb-4">
-                  <img
-                    src={require("../img/kuma.jpg")}
-                    className="card-img-top"
-                    alt=""
-                  />
+                  <img src={kumaImage} className="card-img-top" alt="" />
                 </div>
                 <h3 className="card-title">Kuma Telila</h3>
                 <p className="lead">

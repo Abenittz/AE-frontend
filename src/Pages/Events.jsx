@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { EventContext } from "../MyContext";
 import { FaArrowRight } from "react-icons/fa";
+import indexImage from "../img/event.jpg";
 
 const Events = () => {
   const { events } = useContext(EventContext);
@@ -32,7 +33,7 @@ const Events = () => {
               <div className="card mb-3 p-3" key={event.id}>
                 <div className="col-md-4 col-sm-12">
                   <img
-                    src={require("../img/event.jpg")}
+                    src={indexImage}
                     className="card-img-top my-auto"
                     alt="..."
                   />

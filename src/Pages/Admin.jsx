@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { EventContext } from "../MyContext";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import imageUrl from "../img/event.jpg";
 
 const Admin = () => {
   const { events } = useContext(EventContext);
@@ -43,11 +44,7 @@ const Admin = () => {
                 <div className="card mb-3 p-3 d-flex">
                   <div className="row">
                     <div className="col-md-4 col-lg-12">
-                      <img
-                        src={require("../img/event.jpg")}
-                        className="card-img-top"
-                        alt="..."
-                      />
+                      <img src={imageUrl} className="card-img-top" alt="..." />
                     </div>
 
                     <div className="col-md-8 col-lg-12">
