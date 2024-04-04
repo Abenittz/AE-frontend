@@ -28,14 +28,14 @@ const EventProvider = ({ children }) => {
   //   return data.data;
   // };
 
-  const loginUser = async (email, password) => {
+  const loginUser = async (event_id, email, fullname) => {
     try {
       const response = await fetch("http://127.0.0.1:8000/api/attendee/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ event_id, email, fullname }),
       });
 
       if (!response.ok) {
