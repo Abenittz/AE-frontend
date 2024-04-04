@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-const CountdownTimer = ({ targetDate }) => {
+const CountdownTimer = ({ targetDate, onTimerFinish }) => {
   const calculateTimeLeft = () => {
     const now = new Date();
     const targetTime = targetDate;
     const timeDifference = targetTime - now;
 
     if (timeDifference <= 0) {
+      if (onTimerFinish) {
+        onTimerFinish();
+      }
       return {
         months: "00",
         days: "00",
@@ -47,7 +50,7 @@ const CountdownTimer = ({ targetDate }) => {
     return () => {
       clearInterval(timer);
     };
-  }, [targetDate]);
+  }, [targetDate, onTimerFinish]);
 
   return (
     <>

@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { EventContext } from "../MyContext";
+import { useLocation } from "react-router-dom";
 
 const RoomLogin = () => {
   const { loginUser } = useContext(EventContext);
-
+  const [verified, setVerified] = useState(false);
+  const location = useLocation();
+  console.log(location);
+  const data = location.pathname;
+  console.log(data);
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -13,6 +18,7 @@ const RoomLogin = () => {
       const name = formData.get("fullName");
 
       const userData = await loginUser(email, name);
+      setVerified(true);
 
       console.log("User logged in:", userData);
     } catch (error) {

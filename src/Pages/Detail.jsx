@@ -8,8 +8,10 @@ import CountdownTimer from "../Components/CountdownTimer";
 import imageUrl from "../img/back_banner.webp";
 import image5 from "../img/5.jpg.webp";
 import telebirr from "../img/Telebirr.png";
+import { useState } from "react";
 
 const EventDetail = () => {
+  const [timessup, setTimesup] = useState(false);
   const imageUrl = "/images/back_banner.webp";
 
   const location = useLocation();
@@ -35,6 +37,10 @@ const EventDetail = () => {
     second: "numeric",
   };
 
+  const handleTimeFinsih = () => {
+    setTimesup(true);
+  };
+
   if (!data.event) {
     return <div>Event not found</div>;
   }
@@ -52,22 +58,25 @@ const EventDetail = () => {
                 {targetDate.toLocaleString("en-US", options)} -{" "}
                 {data.event.address}, {data.event.location}
               </h5>
-              <div className="mt-4">
-                <Link
-                  to={`/register/${data.event.id}`}
-                  className="btn btn-light ms-2"
-                >
-                  Register Now
-                </Link>
-              </div>
-              <div className="mt-4">
-                <Link
-                  to={`/roomlogin/${data.event.id}`}
-                  className="btn btn-light ms-2"
-                >
-                  Go Live
-                </Link>
-              </div>
+              {!timessup ? (
+                <div className="mt-4">
+                  <Link
+                    to={`/register/${data.event.id}`}
+                    className="btn btn-light ms-2"
+                  >
+                    Register Now
+                  </Link>
+                </div>
+              ) : (
+                <div className="mt-4">
+                  <Link
+                    to={`/roomlogin/${data.event.id}`}
+                    className="btn btn-danger light ms-2"
+                  >
+                    Go Live
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </BackImg>
@@ -114,7 +123,10 @@ const EventDetail = () => {
             </div>
             <div className="col-12 col-md-9">
               <div id="clock">
-                <CountdownTimer targetDate={targetDate} />
+                <CountdownTimer
+                  targetDate={targetDate}
+                  onTimerFinish={handleTimeFinsih}
+                />
               </div>
             </div>
           </div>
