@@ -6,12 +6,18 @@ const EventContext = createContext();
 // Create a provider component
 const EventProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getEvents = async () => {
-      const eventsFromServer = await fetchEvents();
-      console.log("this the use effect");
-      setEvents(eventsFromServer);
+      try {
+        const eventsFromServer = await fetchEvents();
+        setEvents(eventsFromServer);
+        setLoading(false); // Once data is fetched, set loading to false
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setLoading(false); // Set loading to false in case of error too
+      }
     };
     getEvents();
   }, []);

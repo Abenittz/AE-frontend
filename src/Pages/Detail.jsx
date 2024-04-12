@@ -8,11 +8,12 @@ import CountdownTimer from "../Components/CountdownTimer";
 import imageUrl from "../img/back_banner.webp";
 import image5 from "../img/5.jpg.webp";
 import telebirr from "../img/Telebirr.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EventDetail = () => {
-  const [timessup, setTimesup] = useState(false);
+  const [startevent, setStartevent] = useState(false);
   const imageUrl = "/images/back_banner.webp";
+  const [endEvent, setEndevent] = useState(false);
 
   const location = useLocation();
 
@@ -20,6 +21,15 @@ const EventDetail = () => {
   console.log(data);
   console.log(data.event.speakers);
   const targetDate = new Date(data.event.start_date);
+  const endDate = new Date(data.event.end_date);
+
+  useEffect(() => {
+    const now = new Date();
+    if (now > endDate) {
+      setEndevent(true);
+    }
+  }, [endDate]);
+
   const options = {
     weekday: "long",
     year: "numeric",
@@ -38,7 +48,7 @@ const EventDetail = () => {
   };
 
   const handleTimeFinsih = () => {
-    setTimesup(true);
+    setStartevent(true);
   };
 
   if (!data.event) {
@@ -58,25 +68,41 @@ const EventDetail = () => {
                 {targetDate.toLocaleString("en-US", options)} -{" "}
                 {data.event.address}, {data.event.location}
               </h5>
-              {!timessup ? (
-                <div className="mt-4">
-                  <Link
-                    to={`/register/${data.event.id}`}
-                    className="btn btn-light ms-2"
-                  >
-                    Register Now
-                  </Link>
-                </div>
-              ) : (
-                <div className="mt-4">
-                  <Link
-                    to={`/roomlogin/${data.event.id}`}
-                    className="btn btn-danger light ms-2"
-                  >
-                    Go Live
-                  </Link>
-                </div>
-              )}
+              {(() => {
+                if (!endEvent) {
+                  if (!startevent) {
+                    return (
+                      <div className="mt-4">
+                        <Link
+                          to={`/register/${data.event.id}`}
+                          className="btn btn-light ms-2"
+                        >
+                          Register Now
+                        </Link>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div className="mt-4">
+                        <Link
+                          to={`/roomlogin/${data.event.id}`}
+                          className="btn btn-danger light ms-2"
+                        >
+                          Go Live
+                        </Link>
+                      </div>
+                    );
+                  }
+                } else {
+                  return (
+                    <div className="mt-4">
+                      <button className="btn btn-secondary light ms-2">
+                        Passed
+                      </button>
+                    </div>
+                  );
+                }
+              })()}
             </div>
           </div>
         </BackImg>

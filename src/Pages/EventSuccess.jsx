@@ -12,9 +12,7 @@ const EventSuccess = (props) => {
           <div className="col-lg-6 offset-lg-3 mt-2">
             <div className="card">
               <div className="card-body text-center">
-                <h2 className="card-title text-success">
-                  Registration Successful!
-                </h2>
+                <h2 className="card-title text-success">Event Registered</h2>
                 <p className="card-text text-muted">
                   The Event registered Successfully, now add the sponsor the
                   speaker and the schedule of the event.
