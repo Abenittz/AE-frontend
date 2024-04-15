@@ -5,8 +5,14 @@ import indexImage from "../img/index.webp";
 
 const Home = () => {
   const { events } = useContext(EventContext);
+  const { records } = useContext(EventContext);
 
+  console.log(records);
   console.log(events);
+
+  const latestThree = events.slice(-3);
+  console.log(latestThree.id);
+  console.log(latestThree);
   const upcomingevents = events.filter((event) => event.status === "upcoming");
   console.log(upcomingevents);
   const firstSixEvents = upcomingevents.slice(0, Math.min(events.length, 6));
@@ -121,33 +127,38 @@ const Home = () => {
         style={{ backgroundColor: "#F8F9FA" }}
       >
         <div className="container">
-          <h2 className="text-center mb-4 section-title">Upcoming Events</h2>
+          <h2 className="text-center mb-4 section-title">Latest Events</h2>
           <div className="row">
-            <div className="col-md-4 mb-4">
-              <div className="card custom-event-card">
-                <img src={indexImage} className="card-img-top" alt="Event 1" />
-                <div className="card-body">
-                  <h5 className="card-title text-muted">
-                    Adama Science and Technology University Annual Meeting
-                  </h5>
-                  <p className="card-text">
-                    <span className="text-muted">Date: </span>
-                    <b>November 5, 2023</b>
-                  </p>
-                  <p className="card-text">
-                    <span className="text-muted">Location:</span>{" "}
-                    <b>Another City</b>
-                  </p>
-                  <a
-                    href="/events/2"
-                    className="btn btn-outline-primary btn-block"
-                  >
-                    Learn More
-                  </a>
+            {latestThree.map((event, index) => (
+              <div className="col-md-4 mb-4">
+                <div className="card custom-event-card">
+                  <img
+                    src={indexImage}
+                    className="card-img-top"
+                    alt="Event 1"
+                  />
+                  <div className="card-body">
+                    <h5 className="card-title text-muted">{event.title}</h5>
+                    <p className="card-text">
+                      <span className="text-muted">Date: </span>
+                      <b>November 5, 2023</b>
+                    </p>
+                    <p className="card-text">
+                      <span className="text-muted">Location:</span>{" "}
+                      <b>{event.location}</b>
+                    </p>
+                    <Link
+                      to={`/events/${event.id}`}
+                      state={{ event: event }}
+                      className="btn btn-outline-primary btn-block"
+                    >
+                      Learn More
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-4 mb-4">
+            ))}
+            {/* <div className="col-md-4 mb-4">
               <div className="card custom-event-card">
                 <img src={indexImage} className="card-img-top" alt="Event 2" />
                 <div className="card-body">
@@ -194,7 +205,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
             {/* Add more upcoming event cards here */}
           </div>
         </div>

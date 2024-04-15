@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ZIM } from "zego-zim-web";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 
 function randomID(len) {
@@ -19,40 +20,70 @@ export function getUrlParams(url = window.location.href) {
   return new URLSearchParams(urlStr);
 }
 
-export default function StreamRoom() {
+export default function App() {
   const roomID = getUrlParams().get("roomID") || randomID(5);
-  let myMeeting = async (element) => {
-    // generate Kit Token
-    const appID = 1434746352;
-    const serverSecret = "b98966b3adef8b1499a8b4bdef36a55b";
-    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
-      appID,
-      serverSecret,
-      roomID,
-      randomID(5),
-      randomID(5)
-    );
+  let role_str = getUrlParams(window.location.href).get("role") || "Host";
+  const role =
+    role_str === "Host"
+      ? ZegoUIKitPrebuilt.Host
+      : role_str === "Cohost"
+      ? ZegoUIKitPrebuilt.Cohost
+      : ZegoUIKitPrebuilt.Audience;
 
+  let sharedLinks = [];
+  if (role === ZegoUIKitPrebuilt.Host || role === ZegoUIKitPrebuilt.Cohost) {
+    sharedLinks.push({
+      name: "Join as co-host",
+      url:
+        window.location.protocol +
+        "//" +
+        window.location.host +
+        window.location.pathname +
+        "?roomID=" +
+        roomID +
+        "&role=Cohost",
+    });
+  }
+  sharedLinks.push({
+    name: "Join as audience",
+    url:
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname +
+      "?roomID=" +
+      roomID +
+      "&role=Audience",
+  });
+  // generate Kit Token
+  const appID = 1168750159;
+  const serverSecret = "0259a6ca2997dbb9c4795dd97b5c9b5c";
+  const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+    appID,
+    serverSecret,
+    roomID,
+    randomID(5),
+    randomID(5)
+  );
+
+  // start the call
+  let myMeeting = async (element) => {
     // Create instance object from Kit Token.
     const zp = ZegoUIKitPrebuilt.create(kitToken);
     // start the call
+    zp.addPlugins({ ZIM });
     zp.joinRoom({
       container: element,
-      sharedLinks: [
-        {
-          name: "Copy link",
-          url:
-            window.location.protocol +
-            "//" +
-            window.location.host +
-            window.location.pathname +
-            "?roomID=" +
-            roomID,
-        },
-      ],
       scenario: {
-        mode: ZegoUIKitPrebuilt.GroupCall, // To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
+        mode: ZegoUIKitPrebuilt.LiveStreaming,
+        config: {
+          role,
+        },
       },
+      sharedLinks,
+      showMakeCohostButton: true, // Whether to show the button that is used to invite the audience to co-host on the host end.
+      showRemoveCohostButton: true, // Whether to show the button that is used to remove the audience on the host end.
+      showRequestToCohostButton: true, // Whether to show the button that is used to request to co-host on the audience end.
     });
   };
 

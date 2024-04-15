@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BiTimeFive } from "react-icons/bi";
 import { MdNotes } from "react-icons/md";
 import BackImg from "../Components/BackImg";
@@ -8,7 +8,8 @@ import CountdownTimer from "../Components/CountdownTimer";
 import imageUrl from "../img/back_banner.webp";
 import image5 from "../img/5.jpg.webp";
 import telebirr from "../img/Telebirr.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { EventContext } from "../MyContext";
 
 const EventDetail = () => {
   const [startevent, setStartevent] = useState(false);
@@ -19,9 +20,14 @@ const EventDetail = () => {
 
   const data = location.state;
   console.log(data);
-  console.log(data.event.speakers);
+  console.log(data.event.attendees.length);
   const targetDate = new Date(data.event.start_date);
   const endDate = new Date(data.event.end_date);
+
+  const available_seat = data.event.available_seat;
+  const attendees = data.event.attendees;
+  const check = available_seat > attendees.length;
+  console.log(check);
 
   useEffect(() => {
     const now = new Date();
@@ -84,21 +90,33 @@ const EventDetail = () => {
                   } else {
                     return (
                       <div className="mt-4">
-                        <Link
-                          to={`/roomlogin/${data.event.id}`}
-                          className="btn btn-danger light ms-2"
-                        >
-                          Go Live
-                        </Link>
+                        {check ? (
+                          <button
+                            onClick={handleGoLive}
+                            className="btn btn-danger light ms-2"
+                          >
+                            Go Live
+                          </button>
+                        ) : (
+                          <button
+                            onClick={handleGoLive}
+                            className="btn btn-primary light ms-2"
+                          >
+                            Another Button
+                          </button>
+                        )}
                       </div>
                     );
                   }
                 } else {
                   return (
                     <div className="mt-4">
-                      <button className="btn btn-secondary light ms-2">
-                        Passed
-                      </button>
+                      <Link
+                        to={`/roomlogin/${data.event.id}`}
+                        className="btn btn-danger light ms-2"
+                      >
+                        passed
+                      </Link>
                     </div>
                   );
                 }

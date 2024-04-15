@@ -2,26 +2,23 @@ import React, { useContext } from "react";
 import AdminHeader from "./AdminHeader";
 import Events1 from "../Events";
 import { EventContext } from "../../MyContext";
-import { SpeakerContext } from "../../SpeakerContext";
 import EventList from "./EventList";
 import SearchBar from "./SearchBar";
 import { useLocation } from "react-router-dom";
 
 const CountCard = () => {
+  const { events } = useContext(EventContext);
+  const { speakers } = useContext(EventContext);
+  const { sponsors } = useContext(EventContext);
+  const { attendees } = useContext(EventContext);
   const location = useLocation();
   const data = location.state;
   console.log(data);
-  const { events } = useContext(EventContext);
   console.log(events);
-  const count = events.length;
-  // const { speakers } = useContext(SpeakerContext);
-
-  // if (!speakers || speakers.length === 0) {
-  //   return <div>Loading...</div>;
-  // }
-  // const speakerscount = speakers.length;
-
-  // console.log(speakers);
+  const countEvents = events.length;
+  const countSpeakers = speakers.length;
+  const countSponsors = sponsors.length;
+  const countAttendees = attendees.length;
 
   return (
     <section id="events">
@@ -36,7 +33,7 @@ const CountCard = () => {
               <div className="card-body ps-2">
                 <h5 className="card-title text-muted mb-0  me-4">Events</h5>
                 <h1 className="mb-0 mt-4">
-                  {count}
+                  {countEvents}
                   <span className="fs-3">+</span>
                 </h1>
               </div>
@@ -51,7 +48,7 @@ const CountCard = () => {
               <div className="card-body ps-2">
                 <h5 className="card-title text-muted mb-0  me-4">Speakers</h5>
                 <h1 className="mb-0 mt-4">
-                  {count}
+                  {countSpeakers}
                   <span className="fs-3">+</span>
                 </h1>
               </div>
@@ -66,7 +63,7 @@ const CountCard = () => {
               <div className="card-body ps-2">
                 <h5 className="card-title text-muted mb-0  me-4">Sponsors</h5>
                 <h1 className="mb-0 mt-4">
-                  {count}
+                  {countSponsors}
                   <span className="fs-3">+</span>
                 </h1>
               </div>
@@ -79,9 +76,9 @@ const CountCard = () => {
                 style={{ width: "6px" }}
               ></div>
               <div className="card-body ps-2">
-                <h5 className="card-title text-muted mb-0  me-4">Attendants</h5>
+                <h5 className="card-title text-muted mb-0  me-4">Attendees</h5>
                 <h1 className="mb-0 mt-4">
-                  {count}
+                  {countAttendees}
                   <span className="fs-3">+</span>
                 </h1>
               </div>
@@ -91,7 +88,7 @@ const CountCard = () => {
       </div>
 
       <AdminHeader />
-      <SearchBar />
+
       <EventList />
     </section>
   );

@@ -7,6 +7,7 @@ import imageUrl from "../../img/event.jpg";
 
 const AdminHeader = () => {
   const { events } = useContext(EventContext);
+  console.log(events);
 
   if (!events || events.length === 0) {
     return <div>Loading...</div>;
@@ -41,7 +42,7 @@ const AdminHeader = () => {
             <div className="card-body mt-5 p-0">
               <div className="mt-5">
                 <Link
-                  to={`/speaker/${mostRecentEvent.id}`}
+                  to={`/speaker/${mostRecentEvent ? mostRecentEvent.id : 6}`}
                   className="btn btn-primary"
                 >
                   Go Live Now
