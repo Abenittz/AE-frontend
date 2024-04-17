@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 import About from "./Pages/About";
@@ -21,14 +22,20 @@ import Lobby from "./Pages/Lobby";
 import EventSuccess from "./Pages/EventSuccess";
 import CountCard from "./Components/Admin/CountCard";
 import RoomLogin from "./Pages/RoomLogin";
+import DetailAdmin from "./Components/DetailAdmin";
+import Login from "./Pages/Login";
+import Signin from "./Pages/Signin";
 
 function App() {
+  const isLoginPage = window.location.pathname === "/";
+
   return (
     <Router>
-      <Navbar />
+      {!isLoginPage && <Navbar />}
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/speakers" element={<Speakers />} />
         <Route path="/contact" element={<Contact />} />
@@ -37,18 +44,20 @@ function App() {
         <Route path="/success" element={<Success />} />
         <Route path="/events/:id" element={<EventDetail />} />
         <Route path="/check" element={<SomeCom />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/cards" element={<Admin />} />
         <Route path="/speaker/:id" element={<SpeakerReg />} />
         <Route path="/sponsor/:id" element={<SponsorReg />} />
         <Route path="/schedule/:id" element={<ScheduleReg />} />
         <Route path="/eventreg" element={<EventReg />} />
         <Route path="/eventsucces" element={<EventSuccess />} />
-        <Route path="/room/:id" element={<StreamRoom hidefooter={true} />} />
+        <Route path="/room" element={<StreamRoom hidefooter={true} />} />
         <Route path="/lobby/:id" element={<Lobby />} />
-        <Route path="/cards" element={<CountCard />} />
+        <Route path="/Admin" element={<CountCard />} />
         <Route path="/roomlogin/:id" element={<RoomLogin />} />
+        <Route path="/admindetail/:id" element={<DetailAdmin />} />
+        <Route path="/signin" element={<Signin />} />
       </Routes>
-      <Footer />
+      {!isLoginPage && <Footer />}
     </Router>
   );
 }

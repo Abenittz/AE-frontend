@@ -65,26 +65,53 @@ const EventProvider = ({ children }) => {
     return res.json();
   };
 
-  const loginUser = async (event_id, email, fullname) => {
+  const registerUser = async (userData, onSuccess, onError) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/attendee/login", {
+      const response = await fetch("http://127.0.0.1:8000/api/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ event_id, email, fullname }),
+        body: JSON.stringify(userData),
       });
 
-      if (!response.ok) {
-        throw new Error("User login failed");
+      if (response.ok) {
+        const data = await response.json();
+        setAuthTokens(data);
+        setUser(jwtDecode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+        onSuccess(data);
+      } else {
+        onError();
       }
-
-      const data = await response.json();
-      console.log(data);
-      return data;
     } catch (error) {
-      console.error(error.message);
-      throw error;
+      console.error("Registration error:", error);
+      onError();
+    }
+  };
+
+  const loginUser = async (userData, onSuccess, onError) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setAuthTokens(data);
+        setUser(jwtDecode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+        onSuccess(data);
+      } else {
+        onError();
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      onError();
     }
   };
 
@@ -96,6 +123,7 @@ const EventProvider = ({ children }) => {
     attendees,
     error,
     loginUser,
+    registerUser,
   };
 
   return (

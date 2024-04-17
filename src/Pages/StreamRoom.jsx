@@ -83,7 +83,7 @@ export default function App() {
       sharedLinks,
       showMakeCohostButton: true, // Whether to show the button that is used to invite the audience to co-host on the host end.
       showRemoveCohostButton: true, // Whether to show the button that is used to remove the audience on the host end.
-      showRequestToCohostButton: true, // Whether to show the button that is used to request to co-host on the audience end.
+      showRequestToCohostButton: true,
     });
   };
 

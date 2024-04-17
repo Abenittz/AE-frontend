@@ -2,12 +2,20 @@ import React, { useContext } from "react";
 import imageUrl from "../../img/index.webp";
 import { EventContext } from "../../MyContext";
 import { Link } from "react-router-dom";
+import { FaEllipsisH } from "react-icons/fa"; // Import the FaEllipsisH icon from react-icons/fa
 
 const EventList = () => {
   const { events } = useContext(EventContext);
+  console.log(events);
 
   if (events.length === 0) {
-    return <div className="card">No Event Found</div>;
+    return (
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border text-secondary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -44,9 +52,39 @@ const EventList = () => {
                     <h5 className="text-muted">Location: {event.location}</h5>
                   </div>
 
-                  <div className="option">
-                    <button className="btn btn-secondary">Details</button>
+                  <div class="dropup">
+                    <a
+                      class="btn btn-outline-secondary"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <FaEllipsisH />
+                    </a>
+
+                    <ul class="dropdown-menu">
+                      <li>
+                        <Link
+                          to={`/admindetail/${event.id}`}
+                          state={{ event: event }}
+                          className="dropdown-item"
+                        >
+                          Detail
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
+
+                  {/* <div className="option">
+                    <Link
+                      to={`/admindetail/${event.id}`}
+                      state={{ event: event }}
+                      className="text-secondary fw-bold text-center"
+                    >
+                      <FaEllipsisH />
+                    </Link>
+                  </div> */}
                 </div>
 
                 <div className="card-description mt-5 d-flex justify-content-between ">
