@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EventContext } from "../MyContext";
 
 const Login = () => {
@@ -19,7 +19,7 @@ const Login = () => {
     };
 
     const handleSuccess = (logged) => {
-      navigate("/");
+      navigate("/home", { replace: true });
     };
     const handleError = () => {
       alert("login failed");
@@ -34,13 +34,16 @@ const Login = () => {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
             <div className="card p-5">
-              <form>
+              <form onSubmit={handleLogin}>
                 <h3 className="text-center mb-5">Login</h3>
                 <div className="mb-3">
                   <input
-                    type="email"
+                    type="username"
                     className="form-control mb-4"
                     placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
                   />
                 </div>
                 <div className="mb-5">
@@ -48,6 +51,9 @@ const Login = () => {
                     type="password"
                     className="form-control"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -57,7 +63,8 @@ const Login = () => {
                   </button>
                 </div>
                 <p className="forgot-password text-right">
-                  Dont Have an Account? <a href="#">Sign In</a>
+                  Dont Have an Account?
+                  <Link to={"/signin"}>Sign In</Link>
                 </p>
               </form>
             </div>

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { EventContext } from "../MyContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signin = () => {
   const { registerUser } = useContext(EventContext);
@@ -10,7 +10,6 @@ const Signin = () => {
   const [password, setPassword] = useState([]);
 
   const navigate = useNavigate();
-  console.log(navigate);
 
   const handleUSerSignIn = async (e) => {
     e.preventDefault();
@@ -85,7 +84,7 @@ const Signin = () => {
                   </button>
                 </div>
                 <p className="forgot-password text-right">
-                  Already registered? <a href="/sign-in">Login</a>
+                  Already registered? <Link to={"/"}>Login</Link>
                 </p>
               </form>
             </div>

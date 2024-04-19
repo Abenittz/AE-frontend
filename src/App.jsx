@@ -25,9 +25,11 @@ import RoomLogin from "./Pages/RoomLogin";
 import DetailAdmin from "./Components/DetailAdmin";
 import Login from "./Pages/Login";
 import Signin from "./Pages/Signin";
+import Profile from "./Pages/Profile";
 
 function App() {
-  const isLoginPage = window.location.pathname === "/";
+  const isLoginPage =
+    window.location.pathname === "/" || window.location.pathname === "/signin";
 
   return (
     <Router>
@@ -56,6 +58,7 @@ function App() {
         <Route path="/roomlogin/:id" element={<RoomLogin />} />
         <Route path="/admindetail/:id" element={<DetailAdmin />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       {!isLoginPage && <Footer />}
     </Router>

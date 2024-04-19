@@ -1,8 +1,17 @@
-import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import duresaImage from "../img/duresa.jpg";
+import { EventContext } from "../MyContext";
 
 const Navbar = () => {
+  const { user } = useContext(EventContext);
+  const { getuser } = useContext(EventContext);
+  const { fullname } = user;
+  console.log(fullname);
+  console.log(user);
+
+  // console.log(getuser.fullname);
+  console.log(user.user_id);
   const location = useLocation();
   const hidenavpath = ["/room"];
 
@@ -16,7 +25,7 @@ const Navbar = () => {
       >
         <div className="container">
           <NavLink to="/home" className="navbar-brand fw-bold">
-            <span className="text-primary">ASTU</span>Events
+            <span className="text-primary">Dev</span>Meetup
           </NavLink>
 
           <button
@@ -58,20 +67,24 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <div className="card p-1 px-2 ms-3">
-                  <div className="card-content d-flex justify-content-end align-items-center">
-                    <p className="m-0">Abenezer</p>
-                    <img
-                      src={duresaImage}
-                      className="card-img ms-2"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        borderRadius: "100%",
-                      }}
-                    ></img>
-                  </div>
-                </div>
+                <Link to={"/profile"}>
+                  {getuser.map((user) => (
+                    <div className="card p-1 px-2 ms-3" key={user.user_id}>
+                      <div className="card-content d-flex justify-content-end align-items-center">
+                        <p className="m-0">{user.fullname}</p>
+                        <img
+                          src={duresaImage}
+                          className="card-img ms-2"
+                          style={{
+                            width: "30px",
+                            height: "30px",
+                            borderRadius: "100%",
+                          }}
+                        ></img>
+                      </div>
+                    </div>
+                  ))}
+                </Link>
               </li>
             </ul>
             {/* <form className="d-flex">

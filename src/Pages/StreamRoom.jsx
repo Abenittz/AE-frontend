@@ -77,12 +77,14 @@ export default function App() {
       scenario: {
         mode: ZegoUIKitPrebuilt.LiveStreaming,
         config: {
-          role,
+          role: ZegoUIKitPrebuilt.Audience,
+          liveStreamingMode: ZegoUIKitPrebuilt.LiveStreamingMode.LiveStreaming,
         },
       },
       sharedLinks,
-      showMakeCohostButton: true, // Whether to show the button that is used to invite the audience to co-host on the host end.
-      showRemoveCohostButton: true, // Whether to show the button that is used to remove the audience on the host end.
+      showUserList: true,
+      showMakeCohostButton: true,
+      showRemoveCohostButton: true,
       showRequestToCohostButton: true,
     });
   };

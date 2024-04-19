@@ -73,23 +73,32 @@ const EventDetail = () => {
                   if (!startevent) {
                     return (
                       <div className="mt-4">
-                        <Link
+                        {/* <Link
                           to={`/register/${data.event.id}`}
                           className="btn btn-light ms-2"
                         >
                           Register Now
-                        </Link>
+                        </Link> */}
+                        <button className="btn btn-light ms-2">
+                          Coming Soon
+                        </button>
                       </div>
                     );
                   } else {
                     return (
                       <div className="mt-4">
-                        <Link
+                        {/* <Link
                           to={`/roomlogin/${data.event.id}`}
                           className="btn btn-danger light ms-2"
                         >
                           Go Live
-                        </Link>
+                        </Link> */}
+                        <button
+                          onClick={handleGoLive}
+                          className="btn btn-danger light ms-2"
+                        >
+                          Go Live
+                        </button>
                       </div>
                     );
                   }

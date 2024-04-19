@@ -52,12 +52,12 @@ const Home = () => {
                   >
                     View Schedule
                   </Link>
-                  <Link
+                  {/* <Link
                     to={`/register/${mostRecentEvent.id}`}
                     className="btn btn-light ms-2 slide-from-right"
                   >
                     Register Now
-                  </Link>
+                  </Link> */}
                 </div>
               )}
             </div>

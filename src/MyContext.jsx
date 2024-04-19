@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 // Create the context
 const EventContext = createContext();
@@ -9,8 +10,20 @@ const EventProvider = ({ children }) => {
   const [speakers, setSpeakers] = useState([]);
   const [sponsors, setSponsors] = useState([]);
   const [attendees, setAttendees] = useState([]);
+  const [getuser, setGetuser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  let [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
+  );
+  let [user, setUser] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? jwtDecode(localStorage.getItem("authTokens"))
+      : null
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,10 +32,12 @@ const EventProvider = ({ children }) => {
         const speakersFromServer = await fetchSpeakers();
         const sponsorsFromServer = await fetchSponsors();
         const attendeesFromServer = await fetchAttendees();
+        const userfromserver = await fetchUsers();
         setEvents(eventsFromServer);
         setSpeakers(speakersFromServer);
         setSponsors(sponsorsFromServer);
         setAttendees(attendeesFromServer);
+        setGetuser(userfromserver);
       } catch (error) {
         setError("Error fetching data");
       } finally {
@@ -65,6 +80,20 @@ const EventProvider = ({ children }) => {
     return res.json();
   };
 
+  const fetchUsers = async () => {
+    const res = await fetch(`http://127.0.0.1:8000/api/users/${user.user_id}/`);
+    if (!res.ok) {
+      throw new Error("Failed to fetch attendees");
+    }
+    const data = await res.json();
+    console.log(data);
+    const usersArray = [];
+    usersArray.push(data);
+    console.log(usersArray);
+
+    return usersArray;
+  };
+
   const registerUser = async (userData, onSuccess, onError) => {
     try {
       const response = await fetch("http://127.0.0.1:8000/api/register/", {
@@ -77,9 +106,7 @@ const EventProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        setAuthTokens(data);
-        setUser(jwtDecode(data.access));
-        localStorage.setItem("authTokens", JSON.stringify(data));
+        console.log(data);
         onSuccess(data);
       } else {
         onError();
@@ -102,8 +129,10 @@ const EventProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
         setAuthTokens(data);
         setUser(jwtDecode(data.access));
+        console.log(jwtDecode(data.access));
         localStorage.setItem("authTokens", JSON.stringify(data));
         onSuccess(data);
       } else {
@@ -124,6 +153,8 @@ const EventProvider = ({ children }) => {
     error,
     loginUser,
     registerUser,
+    user,
+    getuser,
   };
 
   return (
