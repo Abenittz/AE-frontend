@@ -10,7 +10,7 @@ const EventProvider = ({ children }) => {
   const [speakers, setSpeakers] = useState([]);
   const [sponsors, setSponsors] = useState([]);
   const [attendees, setAttendees] = useState([]);
-  const [getuser, setGetuser] = useState([]);
+  // const [getuser, setGetuser] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,11 +19,13 @@ const EventProvider = ({ children }) => {
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
-  let [user, setUser] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? jwtDecode(localStorage.getItem("authTokens"))
-      : null
-  );
+  // let [user, setUser] = useState(() =>
+  //   localStorage.getItem("authTokens")
+  //     ? jwtDecode(localStorage.getItem("authTokens"))
+  //     : null
+  // );
+  let [user, setUser] = useState([]);
+  console.log(user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,12 +34,12 @@ const EventProvider = ({ children }) => {
         const speakersFromServer = await fetchSpeakers();
         const sponsorsFromServer = await fetchSponsors();
         const attendeesFromServer = await fetchAttendees();
-        const userfromserver = await fetchUsers();
+        // const userfromserver = await fetchUsers();
         setEvents(eventsFromServer);
         setSpeakers(speakersFromServer);
         setSponsors(sponsorsFromServer);
         setAttendees(attendeesFromServer);
-        setGetuser(userfromserver);
+        // setGetuser(userfromserver);
       } catch (error) {
         setError("Error fetching data");
       } finally {
@@ -80,19 +82,19 @@ const EventProvider = ({ children }) => {
     return res.json();
   };
 
-  const fetchUsers = async () => {
-    const res = await fetch(`http://127.0.0.1:8000/api/users/${user.user_id}/`);
-    if (!res.ok) {
-      throw new Error("Failed to fetch attendees");
-    }
-    const data = await res.json();
-    console.log(data);
-    const usersArray = [];
-    usersArray.push(data);
-    console.log(usersArray);
+  // const fetchUsers = async () => {
+  //   const res = await fetch(`http://127.0.0.1:8000/api/users/${user.user_id}/`);
+  //   if (!res.ok) {
+  //     throw new Error("Failed to fetch attendees");
+  //   }
+  //   const data = await res.json();
+  //   console.log(data);
+  //   const usersArray = [];
+  //   usersArray.push(data);
+  //   console.log(usersArray);
 
-    return usersArray;
-  };
+  //   return usersArray;
+  // };
 
   const registerUser = async (userData, onSuccess, onError) => {
     try {
@@ -129,11 +131,13 @@ const EventProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+
+        const { user, access, refresh } = data;
+        const authData = { user, access, refresh };
+        console.log(jwtDecode(access));
+        await setUser(data["user"]);
         setAuthTokens(data);
-        setUser(jwtDecode(data.access));
-        console.log(jwtDecode(data.access));
-        localStorage.setItem("authTokens", JSON.stringify(data));
+        localStorage.setItem("authData", JSON.stringify(user));
         onSuccess(data);
       } else {
         onError();
@@ -154,7 +158,7 @@ const EventProvider = ({ children }) => {
     loginUser,
     registerUser,
     user,
-    getuser,
+    // getuser,
   };
 
   return (

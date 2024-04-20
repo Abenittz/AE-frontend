@@ -1,24 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import duresaImage from "../img/duresa.jpg";
 import { EventContext } from "../MyContext";
+import useAuth from "../UseAuth";
 
 const Navbar = () => {
   const { user } = useContext(EventContext);
-  const { getuser } = useContext(EventContext);
-  const { fullname } = user;
-  console.log(fullname);
-  console.log(user);
+  const [userData, setUserData] = useState();
+
+  const { authData } = useAuth();
+  console.log(authData);
+
+  // Access user information
+  // const user = authData && authData.user;
+  // console.log(user);
 
   // console.log(getuser.fullname);
-  console.log(user.user_id);
   const location = useLocation();
   const hidenavpath = ["/room"];
 
   const shouldhidenavbar = hidenavpath.includes(location.pathname);
+  console.log(user);
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("authData");
+    if (storedUserData) {
+      setUserData(JSON.parse(storedUserData));
+    }
+  }, []);
 
+  console.log(userData);
   return (
-    !shouldhidenavbar && (
+    <>
       <nav
         className="navbar navbar-expand-lg navbar-light fixed-top py-3 border-bottom"
         id="myNav"
@@ -67,11 +79,13 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <Link to={"/profile"}>
-                  {getuser.map((user) => (
-                    <div className="card p-1 px-2 ms-3" key={user.user_id}>
+                {user && (
+                  <Link to="/profile">
+                    <div className="card p-1 px-2 ms-3">
                       <div className="card-content d-flex justify-content-end align-items-center">
-                        <p className="m-0">{user.fullname}</p>
+                        <p className="m-0">
+                          {userData && userData["fullname"]}
+                        </p>
                         <img
                           src={duresaImage}
                           className="card-img ms-2"
@@ -83,8 +97,8 @@ const Navbar = () => {
                         ></img>
                       </div>
                     </div>
-                  ))}
-                </Link>
+                  </Link>
+                )}
               </li>
             </ul>
             {/* <form className="d-flex">
@@ -101,7 +115,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-    )
+    </>
   );
 };
 

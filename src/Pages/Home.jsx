@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { EventContext } from "../MyContext";
 import indexImage from "../img/index.webp";
+import Navbar from "../Components/Navbar";
 
 const Home = () => {
   const { events } = useContext(EventContext);
@@ -25,6 +26,7 @@ const Home = () => {
 
   return (
     <>
+      <Navbar />
       <section
         id="hero"
         className="min-vh-100 d-flex align-items-start text-center fade-in"

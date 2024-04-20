@@ -19,9 +19,17 @@ const EventDetail = () => {
 
   const data = location.state;
   console.log(data);
-  console.log(data.event.speakers);
   const targetDate = new Date(data.event.start_date);
   const endDate = new Date(data.event.end_date);
+
+  const lastLink = data.event.roomids;
+  console.log(lastLink);
+  if (lastLink.length !== 0) {
+    const thelink = lastLink[lastLink.length - 1].roomId;
+    console.log(thelink);
+  } else {
+    const thelink = null;
+  }
 
   useEffect(() => {
     const now = new Date();
@@ -55,6 +63,11 @@ const EventDetail = () => {
     return <div>Event not found</div>;
   }
 
+  const handleGoLive = () => {
+    window.location.href = `${thelink}`;
+    // console.log("hellp world");
+  };
+
   return (
     <>
       <section id="event-detail">
@@ -79,7 +92,10 @@ const EventDetail = () => {
                         >
                           Register Now
                         </Link> */}
-                        <button className="btn btn-light ms-2">
+                        <button
+                          className="btn btn-light ms-2"
+                          onClick={handleGoLive}
+                        >
                           Coming Soon
                         </button>
                       </div>
