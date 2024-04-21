@@ -18,12 +18,13 @@ const CountdownTimer = ({ targetDate, onTimerFinish }) => {
         seconds: "00",
       };
     }
+    let months = targetTime.getUTCMonth() - now.getUTCMonth();
+    let years = targetTime.getUTCFullYear() - now.getUTCFullYear();
 
-    const months = String(
-      now.getUTCMonth() -
-        targetTime.getUTCMonth() +
-        12 * (targetTime.getUTCFullYear() - now.getUTCFullYear())
-    ).padStart(2, "0");
+    if (months < 0) {
+      months += 12;
+      years -= 1;
+    }
     const days = String(
       Math.floor(timeDifference / (1000 * 60 * 60 * 24))
     ).padStart(2, "0");

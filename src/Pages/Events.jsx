@@ -66,7 +66,9 @@ const Events = () => {
               </div>
             ))}
           </div>
+
           <div className="separator-column col-md-1"></div>
+
           <div className="filters col-md-4 border p-4">
             <h3 className="mb-4">Filters</h3>
             <form>

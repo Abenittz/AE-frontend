@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import imageUrl from "../../img/index.webp";
 import { EventContext } from "../../MyContext";
 import { Link } from "react-router-dom";
-import { FaEllipsisH } from "react-icons/fa"; // Import the FaEllipsisH icon from react-icons/fa
+import { FaEllipsisH } from "react-icons/fa";
 
 const EventList = () => {
   const { events } = useContext(EventContext);

@@ -14,6 +14,17 @@ const EventDetail = () => {
   const [startevent, setStartevent] = useState(false);
   const imageUrl = "/images/back_banner.webp";
   const [endEvent, setEndevent] = useState(false);
+  const [link, setLink] = useState(null);
+
+  useEffect(() => {
+    if (link !== null) {
+      const resetTimer = setTimeout(() => {
+        setLink(null);
+      }, 1000);
+
+      return () => clearTimeout(resetTimer);
+    }
+  }, [link]);
 
   const location = useLocation();
 
@@ -22,14 +33,12 @@ const EventDetail = () => {
   const targetDate = new Date(data.event.start_date);
   const endDate = new Date(data.event.end_date);
 
-  const lastLink = data.event.roomids;
-  console.log(lastLink);
-  if (lastLink.length !== 0) {
-    const thelink = lastLink[lastLink.length - 1].roomId;
-    console.log(thelink);
-  } else {
-    const thelink = null;
-  }
+  useEffect(() => {
+    const lastLink = data.event.roomids;
+    if (lastLink.length !== 0) {
+      setLink(lastLink[lastLink.length - 1].roomId);
+    }
+  }, [data]);
 
   useEffect(() => {
     const now = new Date();
@@ -64,7 +73,7 @@ const EventDetail = () => {
   }
 
   const handleGoLive = () => {
-    window.location.href = `${thelink}`;
+    window.location.href = `${link}`;
     // console.log("hellp world");
   };
 
@@ -92,10 +101,7 @@ const EventDetail = () => {
                         >
                           Register Now
                         </Link> */}
-                        <button
-                          className="btn btn-light ms-2"
-                          onClick={handleGoLive}
-                        >
+                        <button className="btn btn-light ms-2">
                           Coming Soon
                         </button>
                       </div>
@@ -109,12 +115,18 @@ const EventDetail = () => {
                         >
                           Go Live
                         </Link> */}
-                        <button
-                          onClick={handleGoLive}
-                          className="btn btn-danger light ms-2"
-                        >
-                          Go Live
-                        </button>
+                        {link !== null ? (
+                          <button
+                            onClick={handleGoLive}
+                            className="btn btn-danger light ms-2"
+                          >
+                            Go Live
+                          </button>
+                        ) : (
+                          <button className="btn btn-danger light ms-2">
+                            Waiting...
+                          </button>
+                        )}
                       </div>
                     );
                   }
