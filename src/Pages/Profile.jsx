@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import duresaImage from "../img/duresa.jpg";
 import { EventContext } from "../MyContext";
 import Navbar from "../Components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const { events } = useContext(EventContext);
-  const { records } = useContext(EventContext);
+  const { events, logoutUser } = useContext(EventContext);
   const [user, setUser] = useState();
 
   console.log(records);
@@ -31,6 +31,13 @@ const Profile = () => {
   console.log(localStorage.getItem("authData"));
 
   console.log(user);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate("/", { replace: true });
+  };
   return (
     <>
       <Navbar />
@@ -58,6 +65,15 @@ const Profile = () => {
                       {user && <>{user["fullname"]}</>}
                     </h3>
                     <p className="lead"> {user && <>{user["email"]}</>}</p>
+                  </div>
+
+                  <div className="container">
+                    <button
+                      className="btn btn-primary w-100"
+                      onClick={handleLogout}
+                    >
+                      Log Out
+                    </button>
                   </div>
                 </div>
               </div>

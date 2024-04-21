@@ -153,6 +153,17 @@ const EventProvider = ({ children }) => {
     }
   };
 
+  const logoutUser = () => {
+    try {
+      localStorage.removeItem("authData");
+      setUser(null);
+      setAuthTokens(null);
+      console.log("Logged out successfully");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   const contextValue = {
     events,
     loading,
@@ -161,6 +172,7 @@ const EventProvider = ({ children }) => {
     attendees,
     error,
     loginUser,
+    logoutUser,
     registerUser,
     user,
     // getuser,
