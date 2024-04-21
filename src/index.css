@@ -409,3 +409,14 @@ footer {
   position: relative;
   left: 0px;
 }
+
+
+
+
+#loginimg {
+  background: linear-gradient(rgba(var(--c-brand-rgb), 0.507), rgba(var(--c-brand-rgb), 0.438)), url('./img/event_banner.png');
+  background-position: right;
+  background-size: cover;
+  height: 100vh;
+
+}

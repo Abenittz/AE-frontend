@@ -32,61 +32,102 @@ const Signin = () => {
   };
   return (
     <section className="vh-100 gradient-custom">
-      <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div className="card p-5">
-              <form onSubmit={handleUSerSignIn}>
-                <h3 className="mb-5 text-center">Sign Up</h3>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Full Name"
-                    value={fullname}
-                    onChange={(e) => setFullname(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-5">
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="d-grid mb-3">
-                  <button type="submit" className="btn btn-primary">
+      <div class="vh-100">
+        <div className="container-fluid">
+          <div className="row d-flex  align-items-center">
+            <div className="col-sm-6 text-black ">
+              <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+                <form style={{ width: "23rem" }} onSubmit={handleUSerSignIn}>
+                  <h3
+                    className="fw-bold mb-3 pb-3 mb-5"
+                    style={{ letterSpacing: "1px" }}
+                  >
                     Sign Up
-                  </button>
-                </div>
-                <p className="forgot-password text-right">
-                  Already registered? <Link to={"/"}>Login</Link>
+                  </h3>
+
+                  <div data-mdb-input-init className="form-outline mb-4">
+                    <label className="form-label" for="form2Example18">
+                      Full Name
+                    </label>
+                    <input
+                      type="fullname"
+                      className="form-control form-control-lg"
+                      // placeholder="fullname"
+                      value={fullname}
+                      onChange={(e) => setFullname(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div data-mdb-input-init className="form-outline mb-4">
+                    <label className="form-label" for="form2Example18">
+                      Username
+                    </label>
+                    <input
+                      type="username"
+                      className="form-control form-control-lg"
+                      // placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div data-mdb-input-init className="form-outline mb-4">
+                    <label className="form-label" for="form2Example18">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control form-control-lg"
+                      // placeholder="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div data-mdb-input-init className="form-outline mb-4">
+                    <label className="form-label" for="form2Example28">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control form-control-lg"
+                      // placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="pt-1 mb-5">
+                    <button
+                      data-mdb-button-init
+                      data-mdb-ripple-init
+                      className="btn btn-primary btn-lg  btn-block"
+                      type="submit"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+
+                  <p>
+                    Already registered?{" "}
+                    <Link to={"/"} className="primary-info">
+                      Login
+                    </Link>
+                  </p>
+                </form>
+              </div>
+            </div>
+            <div className="col-sm-6 px-0 d-none d-sm-block S" id="loginimg">
+              <div className="d-flex flex-column justify-content-center vh-100 align-items-center">
+                <h1 className="text-white display-1">
+                  <span className="text-primary text-center">Dev</span>Meetup
+                </h1>
+                <p className="text-white">
+                  Live Streaming Meetup From all over the world
                 </p>
-              </form>
+              </div>
             </div>
           </div>
         </div>
