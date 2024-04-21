@@ -32,7 +32,7 @@ const Speakers = () => {
                       <div className="img-area mb-4">
                         <img
                           src={duresaImage}
-                          className="card-img-top"
+                          className="card-img-top rounded-5"
                           alt=""
                         />
                       </div>

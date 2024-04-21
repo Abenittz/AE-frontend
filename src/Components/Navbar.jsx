@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import duresaImage from "../img/duresa.jpg";
 import { EventContext } from "../MyContext";
 import useAuth from "../UseAuth";
@@ -8,8 +8,8 @@ const Navbar = () => {
   const { user } = useContext(EventContext);
   const [userData, setUserData] = useState();
 
-  const { authData } = useAuth();
-  console.log(authData);
+  // const { authData } = useAuth();
+  // console.log(authData);
 
   // Access user information
   // const user = authData && authData.user;
@@ -29,6 +29,10 @@ const Navbar = () => {
   }, []);
 
   console.log(userData);
+  const navigate = useNavigate();
+  const handleGotoProfile = () => {
+    navigate("/profile", { replace: true });
+  };
   return (
     <>
       <nav
@@ -80,24 +84,23 @@ const Navbar = () => {
               </li>
               <li>
                 {user && (
-                  <Link to="/profile">
-                    <div className="card p-1 px-2 ms-3">
-                      <div className="card-content d-flex justify-content-end align-items-center">
-                        <p className="m-0">
-                          {userData && userData["fullname"]}
-                        </p>
-                        <img
-                          src={duresaImage}
-                          className="card-img ms-2"
-                          style={{
-                            width: "30px",
-                            height: "30px",
-                            borderRadius: "100%",
-                          }}
-                        ></img>
-                      </div>
+                  <div
+                    className="card p-1 px-2 ms-3"
+                    onClick={handleGotoProfile}
+                  >
+                    <div className="card-content d-flex justify-content-end align-items-center">
+                      <p className="m-0">{userData && userData["fullname"]}</p>
+                      <img
+                        src={duresaImage}
+                        className="card-img ms-2"
+                        style={{
+                          width: "30px",
+                          height: "30px",
+                          borderRadius: "100%",
+                        }}
+                      ></img>
                     </div>
-                  </Link>
+                  </div>
                 )}
               </li>
             </ul>

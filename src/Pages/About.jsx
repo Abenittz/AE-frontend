@@ -9,8 +9,7 @@ const About = () => {
             <div className="card">
               <div className="card-body">
                 <h2 className="card-title text-center mb-4">
-                  Welcome to Adama Science and Technology University(ASTU)
-                  Events Platform
+                  Welcome to DEvelopers Meetup Events Platform
                 </h2>
                 <p className="card-text">
                   At Adama Science and Technology University(ASTU), we believe
