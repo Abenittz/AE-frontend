@@ -1,15 +1,9 @@
-import React, { useContext } from "react";
 import { Navigate, Route } from "react-router-dom";
-import { EventContext } from "./MyContext";
 
-const PrivateRoute = ({ element, ...rest }) => {
-  const { authData } = useContext(EventContext);
-
-  return authData ? (
-    <Route {...rest} element={element} />
-  ) : (
-    <Navigate to="/login" replace />
-  );
+const PrivateRoute = ({ children }) => {
+  // let { user } = useContext(EventContext);
+  const user = true;
+  return user ? <>{children}</> : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;
