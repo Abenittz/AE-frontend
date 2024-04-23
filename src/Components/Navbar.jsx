@@ -8,31 +8,33 @@ const Navbar = () => {
   const { user } = useContext(EventContext);
   const [userData, setUserData] = useState();
 
-  // const { authData } = useAuth();
-  // console.log(authData);
-
-  // Access user information
-  // const user = authData && authData.user;
-  // console.log(user);
-
-  // console.log(getuser.fullname);
   const location = useLocation();
-  const hidenavpath = ["/room"];
+  const navigate = useNavigate();
 
-  const shouldhidenavbar = hidenavpath.includes(location.pathname);
-  console.log(user);
+  const hidenabar = /\/room/.test(location.pathname);
+
   useEffect(() => {
     const storedUserData = localStorage.getItem("authData");
     if (storedUserData) {
-      setUserData(JSON.parse(storedUserData));
+      try {
+        const userData = JSON.parse(storedUserData);
+        setUserData(userData);
+      } catch (error) {
+        console.error("Error parsing storedUserData:", error);
+      }
+    } else {
+      console.warn("No stored user data found.");
     }
   }, []);
 
-  console.log(userData);
-  const navigate = useNavigate();
   const handleGotoProfile = () => {
     navigate("/profile", { replace: true });
   };
+
+  if (hidenabar) {
+    return null;
+  }
+
   return (
     <>
       <nav
@@ -104,17 +106,6 @@ const Navbar = () => {
                 )}
               </li>
             </ul>
-            {/* <form className="d-flex">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form> */}
           </div>
         </div>
       </nav>

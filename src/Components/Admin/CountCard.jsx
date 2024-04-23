@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import AdminHeader from "./AdminHeader";
-import Events1 from "../Events";
+// import Events1 from "../Events";
 import { EventContext } from "../../MyContext";
 import EventList from "./EventList";
 import SearchBar from "./SearchBar";

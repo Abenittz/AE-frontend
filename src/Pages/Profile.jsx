@@ -8,7 +8,6 @@ const Profile = () => {
   const { events, logoutUser } = useContext(EventContext);
   const [user, setUser] = useState();
 
-  console.log(records);
   console.log(events);
 
   const latestThree = events.slice(-3);
@@ -44,7 +43,9 @@ const Profile = () => {
       <section id="events">
         <div className="container vh-100">
           <div className="row mt-2 px-3">
-            <div className="upcoming col-md-7 border p-4 fade-in"></div>
+            <div className="upcoming col-md-7 border p-4 fade-in vh-100">
+              <h3 className="text-black fw-bold">Your Events</h3>
+            </div>
 
             <div className="filters col-md-4 border p-4">
               <div className="col-12">

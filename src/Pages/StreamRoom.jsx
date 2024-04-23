@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ZIM } from "zego-zim-web";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
+import { useLocation } from "react-router-dom";
 
 function randomID(len) {
   let result = "";
@@ -21,7 +22,11 @@ export function getUrlParams(url = window.location.href) {
 }
 
 export default function App() {
-  const roomID = getUrlParams().get("roomID") || randomID(5);
+  const location = useLocation();
+  // const roomID = getUrlParams().get("roomID") || randomID(5);
+
+  const roomId = location.pathname.match(/\/room\/([^\/]+)$/)[1];
+  console.log(roomId);
   let role_str = getUrlParams(window.location.href).get("role") || "Host";
   const role =
     role_str === "Host"
@@ -40,7 +45,7 @@ export default function App() {
         window.location.host +
         window.location.pathname +
         "?roomID=" +
-        roomID +
+        roomId +
         "&role=Cohost",
     });
   }
@@ -52,7 +57,7 @@ export default function App() {
       window.location.host +
       window.location.pathname +
       "?roomID=" +
-      roomID +
+      roomId +
       "&role=Audience",
   });
   // generate Kit Token
@@ -61,7 +66,7 @@ export default function App() {
   const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
     appID,
     serverSecret,
-    roomID,
+    roomId,
     randomID(5),
     randomID(5)
   );
@@ -81,7 +86,7 @@ export default function App() {
           liveStreamingMode: ZegoUIKitPrebuilt.LiveStreamingMode.LiveStreaming,
         },
       },
-      sharedLinks,
+
       showUserList: true,
       showMakeCohostButton: true,
       showRemoveCohostButton: true,

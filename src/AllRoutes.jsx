@@ -52,7 +52,7 @@ const AllRoutes = () => {
         <Route path="/schedule/:id" element={<ScheduleReg />} />
         <Route path="/eventreg" element={<EventReg />} />
         <Route path="/eventsucces" element={<EventSuccess />} />
-        <Route path="/room" element={<StreamRoom hidefooter={true} />} />
+        <Route path="/room/:id" element={<StreamRoom hidefooter={true} />} />
         <Route path="/lobby/:id" element={<Lobby />} />
         <Route path="/Admin" element={<CountCard />} />
         <Route path="/roomlogin/:id" element={<RoomLogin />} />

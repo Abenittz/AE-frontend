@@ -108,11 +108,11 @@ const EventProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        const { user, access, refresh } = data;
-        console.log(data);
-        await setUser(data["user"]);
-        localStorage.removeItem("authData");
-        localStorage.setItem("authData", JSON.stringify(user));
+        const { userdata, access, refresh } = data;
+        console.log(data["user"]);
+        setUser(data["user"]);
+
+        await localStorage.setItem("authData", JSON.stringify(data["user"]));
         onSuccess(data);
       } else {
         onError();
@@ -137,11 +137,11 @@ const EventProvider = ({ children }) => {
         const data = await response.json();
 
         const { user, access, refresh } = data;
-        const authData = { user, access, refresh };
+        // const authData = { user, access, refresh };
         console.log(jwtDecode(access));
-        await setUser(data["user"]);
+        setUser(data["user"]);
         setAuthTokens(data);
-        localStorage.removeItem("authData");
+
         localStorage.setItem("authData", JSON.stringify(user));
         onSuccess(data);
       } else {

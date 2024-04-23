@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { BiTimeFive } from "react-icons/bi";
 import { MdNotes } from "react-icons/md";
 import BackImg from "../Components/BackImg";
@@ -14,13 +14,30 @@ const EventDetail = () => {
   const [startevent, setStartevent] = useState(false);
   const imageUrl = "/images/back_banner.webp";
   const [endEvent, setEndevent] = useState(false);
-  const [link, setLink] = useState(null);
+  const [link, setLink] = useState();
+  const [userData, setUserData] = useState();
+
+  console.log(link);
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("authData");
+    if (storedUserData) {
+      try {
+        const userData = JSON.parse(storedUserData);
+        setUserData(userData);
+      } catch (error) {
+        console.error("Error parsing storedUserData:", error);
+      }
+    } else {
+      console.warn("No stored user data found.");
+    }
+  }, []);
 
   useEffect(() => {
     if (link !== null) {
       const resetTimer = setTimeout(() => {
         setLink(null);
-      }, 1000);
+      }, 3600000);
 
       return () => clearTimeout(resetTimer);
     }
@@ -72,8 +89,10 @@ const EventDetail = () => {
     return <div>Event not found</div>;
   }
 
+  const navigate = useNavigate();
   const handleGoLive = () => {
-    window.location.href = `${link}`;
+    // window.location.href = `${link}`;
+    navigate(`/room/${link}`);
     // console.log("hellp world");
   };
 
@@ -123,7 +142,10 @@ const EventDetail = () => {
                             Go Live
                           </button>
                         ) : (
-                          <button className="btn btn-danger light ms-2">
+                          <button
+                            className="btn btn-danger light ms-2"
+                            onClick={handleGoLive}
+                          >
                             Waiting...
                           </button>
                         )}

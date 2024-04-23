@@ -8,21 +8,16 @@ const Home = () => {
   const { events } = useContext(EventContext);
   const { records } = useContext(EventContext);
 
-  console.log(records);
-  console.log(events);
-
   const latestThree = events.slice(-3);
-  console.log(latestThree.id);
-  console.log(latestThree);
+
   const upcomingevents = events.filter((event) => event.status === "upcoming");
-  console.log(upcomingevents);
+
   const firstSixEvents = upcomingevents.slice(0, Math.min(events.length, 6));
-  console.log(firstSixEvents);
+
   const mostRecentEvent =
     firstSixEvents.length > 0
       ? firstSixEvents[firstSixEvents.length - 1]
       : null;
-  console.log(mostRecentEvent);
 
   return (
     <>
@@ -132,7 +127,7 @@ const Home = () => {
           <h2 className="text-center mb-4 section-title">Latest Events</h2>
           <div className="row">
             {latestThree.map((event, index) => (
-              <div className="col-md-4 mb-4">
+              <div className="col-md-4 mb-4" key={index}>
                 <div className="card custom-event-card">
                   <img
                     src={indexImage}
