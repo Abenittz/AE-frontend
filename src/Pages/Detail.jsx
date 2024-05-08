@@ -37,7 +37,7 @@ const EventDetail = () => {
     if (link !== null) {
       const resetTimer = setTimeout(() => {
         setLink(null);
-      }, 3600000);
+      }, 60000);
 
       return () => clearTimeout(resetTimer);
     }

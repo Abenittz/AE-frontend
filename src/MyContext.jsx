@@ -156,6 +156,7 @@ const EventProvider = ({ children }) => {
   const logoutUser = () => {
     try {
       localStorage.removeItem("authData");
+      console.log(localStorage.getItem("authData"));
       setUser(null);
       setAuthTokens(null);
       console.log("Logged out successfully");
