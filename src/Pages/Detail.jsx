@@ -92,8 +92,10 @@ const EventDetail = () => {
   const navigate = useNavigate();
   const handleGoLive = () => {
     // window.location.href = `${link}`;
-    navigate(`/room/${link}`);
-    // console.log("hellp world");
+    if (link !== null) {
+      navigate(`/room/${link}`);
+    }
+    // console.log("hello world");
   };
 
   return (
@@ -134,7 +136,7 @@ const EventDetail = () => {
                         >
                           Go Live
                         </Link> */}
-                        {link !== null ? (
+                        {link !== null || link !== undefined ? (
                           <button
                             onClick={handleGoLive}
                             className="btn btn-danger light ms-2"

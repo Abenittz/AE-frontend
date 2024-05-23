@@ -28,6 +28,8 @@ import Login from "./Pages/Login";
 import Signin from "./Pages/Signin";
 import Profile from "./Pages/Profile";
 
+import ScreenRecording from "./Components/Admin/Recording";
+
 const AllRoutes = () => {
   const isLoginPage =
     window.location.pathname === "/" || window.location.pathname === "/signin";
@@ -59,6 +61,7 @@ const AllRoutes = () => {
         <Route path="/admindetail/:id" element={<DetailAdmin />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/record" element={<ScreenRecording />} />
       </Routes>
       {!isLoginPage && <Footer />}
     </>

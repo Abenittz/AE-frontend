@@ -13,6 +13,7 @@ const Home = () => {
   const upcomingevents = events.filter((event) => event.status === "upcoming");
 
   const firstSixEvents = upcomingevents.slice(0, Math.min(events.length, 6));
+  console.log(firstSixEvents);
 
   const mostRecentEvent =
     firstSixEvents.length > 0
