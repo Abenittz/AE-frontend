@@ -3,8 +3,24 @@ import { Link } from "react-router-dom";
 import { EventContext } from "../MyContext";
 import { FaArrowRight } from "react-icons/fa";
 import indexImage from "../img/event.jpg";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Events = () => {
+  const location = useLocation();
+  const successMessage = location.state?.successMessage || "";
+
+  useEffect(() => {
+    if (successMessage) {
+      const alert = document.getElementById("success-alert");
+      if (alert) {
+        alert.style.display = "block";
+        setTimeout(() => {
+          alert.style.display = "none";
+        }, 5000); // Hide after 5 seconds
+      }
+    }
+  }, [successMessage]);
   const { events } = useContext(EventContext);
   console.log(events);
   const [dateFilter, setDateFilter] = useState("");
@@ -27,8 +43,24 @@ const Events = () => {
     <section id="events">
       <div className="container">
         <div className="row mt-2 px-3">
+          {successMessage && (
+            <div
+              id="success-alert"
+              className="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              {successMessage}
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          )}
           <div className="upcoming col-md-7 border p-4 fade-in">
             {/* <h3 className="fw-bold">Events</h3> */}
+
             {events.map((event) => (
               <div className="card mb-3 p-3" key={event.id}>
                 <div className="col-md-4 col-sm-12">

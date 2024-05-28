@@ -14,7 +14,7 @@ const Success = () => {
                 Thank you for registering for the event! We look forward to
                 seeing you there.
               </p>
-              <a href="/" className="btn btn-primary">
+              <a href="/home" className="btn btn-primary">
                 Back to Home
               </a>
             </div>

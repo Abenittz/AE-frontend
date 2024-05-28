@@ -23,7 +23,7 @@ const SpeakerReg = () => {
       return;
     }
 
-    const requestOptions = {
+    const res = await fetch("http://127.0.0.1:8000/api/speaker/register/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -32,12 +32,7 @@ const SpeakerReg = () => {
         organization: organization,
         role: role,
       }),
-    };
-
-    const res = await fetch(
-      `http://127.0.0.1:8000/api/speaker/register/`,
-      requestOptions
-    );
+    });
     if (res.status === 201) {
       const data = await res.json();
       console.log(data);

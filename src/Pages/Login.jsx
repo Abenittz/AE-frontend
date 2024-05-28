@@ -87,7 +87,7 @@ const Login = () => {
 
                   <p>
                     Don't have an account?{" "}
-                    <Link to={"/signin"} className="primary-info">
+                    <Link to={"/signup"} className="primary-info">
                       Sign Up
                     </Link>
                   </p>

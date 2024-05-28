@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { EventContext } from "../MyContext";
 import { Link, useNavigate } from "react-router-dom";
 
-const Signin = () => {
+const Signup = () => {
   const { registerUser } = useContext(EventContext);
   const [username, setUsername] = useState([]);
   const [fullname, setFullname] = useState([]);
@@ -136,4 +136,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;

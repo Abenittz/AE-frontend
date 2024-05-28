@@ -14,17 +14,17 @@ const EventProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  let [authTokens, setAuthTokens] = useState(() =>
+  const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
-  // let [user, setUser] = useState(() =>
+  // const [user, setUser] = useState(() =>
   //   localStorage.getItem("authTokens")
   //     ? jwtDecode(localStorage.getItem("authTokens"))
   //     : null
   // );
-  let [user, setUser] = useState([]);
+  const [user, setUser] = useState([]);
   console.log(user);
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const EventProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         const { userdata, access, refresh } = data;
-        console.log(data["user"]);
+        console.log(data.user);
         setUser(data["user"]);
 
         await localStorage.setItem("authData", JSON.stringify(data["user"]));

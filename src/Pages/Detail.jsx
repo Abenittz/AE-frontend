@@ -9,29 +9,33 @@ import imageUrl from "../img/back_banner.webp";
 import image5 from "../img/5.jpg.webp";
 import telebirr from "../img/Telebirr.png";
 import { useEffect, useState } from "react";
+import Register from "./Register";
 
 const EventDetail = () => {
   const [startevent, setStartevent] = useState(false);
   const imageUrl = "/images/back_banner.webp";
   const [endEvent, setEndevent] = useState(false);
   const [link, setLink] = useState();
-  const [userData, setUserData] = useState();
-
-  console.log(link);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("authData");
     if (storedUserData) {
-      try {
-        const userData = JSON.parse(storedUserData);
-        setUserData(userData);
-      } catch (error) {
-        console.error("Error parsing storedUserData:", error);
-      }
-    } else {
-      console.warn("No stored user data found.");
+      setUser(JSON.parse(storedUserData));
     }
   }, []);
+  console.log(localStorage.getItem("authData"));
+
+  console.log(user);
+  const thisUser = user && user["fullname"];
+  const thisUserEmail = user && user["email"];
+
+  const handleRegistrationSuccess = () => {
+    setIsRegistered(true);
+  };
+
+  // console.log(link);
 
   useEffect(() => {
     if (link !== null) {
@@ -46,9 +50,17 @@ const EventDetail = () => {
   const location = useLocation();
 
   const data = location.state;
-  console.log(data);
+  console.log(data.event.attendees);
+  const attendees = data.event.attendees;
+  const registeredUser = attendees.filter(
+    (e) => e.fullname === thisUser && e.email === thisUserEmail
+  );
+  console.log(registeredUser);
+
   const targetDate = new Date(data.event.start_date);
   const endDate = new Date(data.event.end_date);
+  const regStartDate = new Date(data.event.registration_start_date);
+  const regEndDate = new Date(data.event.registration_end_date);
 
   useEffect(() => {
     const lastLink = data.event.roomids;
@@ -71,15 +83,15 @@ const EventDetail = () => {
     day: "numeric",
   };
 
-  const regoptions = {
-    weekday: "long", // Full weekday name
-    day: "numeric", // Day of the month
-    month: "long", // Full month name
-    year: "numeric", // 4-digit year
-    hour: "numeric", // Hour in 24-hour format
-    minute: "numeric",
-    second: "numeric",
-  };
+  // const regoptions = {
+  //   weekday: "long", // Full weekday name
+  //   day: "numeric", // Day of the month
+  //   month: "long", // Full month name
+  //   year: "numeric", // 4-digit year
+  //   hour: "numeric", // Hour in 24-hour format
+  //   minute: "numeric",
+  //   second: "numeric",
+  // };
 
   const handleTimeFinsih = () => {
     setStartevent(true);
@@ -116,15 +128,30 @@ const EventDetail = () => {
                   if (!startevent) {
                     return (
                       <div className="mt-4">
+                        {registeredUser.length === 0 && (
+                          <Register
+                            eventId={data.event.id}
+                            FullName={user && user["fullname"]}
+                            Email={user && user["email"]}
+                            AvailableSeat={data.event.availableSeat}
+                            Attendee={data.event.attendees.length}
+                            onRegistrationSuccess={handleRegistrationSuccess}
+                          />
+                        )}
+                        {registeredUser.length !== 0 && (
+                          <button className="btn btn-light  ms-2">
+                            You are Registered
+                          </button>
+                        )}
                         {/* <Link
                           to={`/register/${data.event.id}`}
                           className="btn btn-light ms-2"
                         >
                           Register Now
                         </Link> */}
-                        <button className="btn btn-light ms-2">
+                        {/* <button className="btn btn-light ms-2">
                           Coming Soon
-                        </button>
+                        </button> */}
                       </div>
                     );
                   } else {

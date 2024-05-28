@@ -25,7 +25,7 @@ import CountCard from "./Components/Admin/CountCard";
 import RoomLogin from "./Pages/RoomLogin";
 import DetailAdmin from "./Components/DetailAdmin";
 import Login from "./Pages/Login";
-import Signin from "./Pages/Signin";
+
 import Profile from "./Pages/Profile";
 
 import ScreenRecording from "./Components/Admin/Recording";
@@ -59,7 +59,6 @@ const AllRoutes = () => {
         <Route path="/Admin" element={<CountCard />} />
         <Route path="/roomlogin/:id" element={<RoomLogin />} />
         <Route path="/admindetail/:id" element={<DetailAdmin />} />
-        <Route path="/signin" element={<Signin />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/record" element={<ScreenRecording />} />
       </Routes>
