@@ -19,6 +19,8 @@ const EventDetail = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [user, setUser] = useState();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const storedUserData = localStorage.getItem("authData");
     if (storedUserData) {
@@ -33,6 +35,8 @@ const EventDetail = () => {
 
   const handleRegistrationSuccess = () => {
     setIsRegistered(true);
+    navigate("/events");
+    window.location.reload();
   };
 
   // console.log(link);
@@ -101,7 +105,6 @@ const EventDetail = () => {
     return <div>Event not found</div>;
   }
 
-  const navigate = useNavigate();
   const handleGoLive = () => {
     // window.location.href = `${link}`;
     if (link !== null) {
@@ -355,7 +358,7 @@ const EventDetail = () => {
                 style={{ maxWidth: "800px" }}
               >
                 <a
-                  href={`http://127.0.0.1:8000/api/download-event-schedule-pdf/${data.event.id}/`}
+                  href={`http://127.0.0.1:8000api/download-event-schedule-pdf/${data.event.id}/`}
                   className="btn btn-secondary"
                 >
                   DOWNLOAD SCHEDULE (PDF)

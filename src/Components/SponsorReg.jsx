@@ -33,7 +33,7 @@ const SponsorReg = () => {
     };
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/sponsor/register/`,
+      `http://127.0.0.1:8000api/sponsor/register/`,
       requestOptions
     );
     if (res.status === 201) {

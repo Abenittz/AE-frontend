@@ -10,7 +10,7 @@ const SpeakerProvider = ({ children }) => {
   useEffect(() => {
     const fetchSpeakers = async () => {
       try {
-        const res = await fetch("http://127.0.0.1:8000/api/speakers/");
+        const res = await fetch("http://127.0.0.1:8000api/speakers/");
         if (!res.ok) {
           throw new Error("Failed to fetch speakers");
         }

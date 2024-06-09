@@ -37,7 +37,7 @@ const ScheduleReg = () => {
     };
 
     const res = await fetch(
-      `http://127.0.0.1:8000/api/schedule/register/`,
+      `http://127.0.0.1:8000api/schedule/register/`,
       requestOptions
     );
     if (res.status === 201) {
